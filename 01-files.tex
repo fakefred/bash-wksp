@@ -1,0 +1,351 @@
+% !TeX root = bash.tex
+\section{I. Files \& File Tree}
+\begin{frame}[fragile]
+\frametitle{Files}
+Each of these is a different \textbf{file}:
+\begin{itemize}
+    \item \tt{a}
+    \item \tt{.a} (Hidden)
+    \item \tt{a.txt}
+    \item \tt{A.txt}
+    \item \tt{A.TXT}
+\end{itemize}
+
+\begin{block}{Note}
+    The dot and suffix are part of the filename.
+\end{block}
+
+\begin{block}{Tip}
+    For convenience, \textbf{avoid spaces} and most of the special characters
+    (except \verb|._-|) when working in bash. If you have to, surround filename
+    in quotes: \tt{`Lab Report (3) final FINAL-1.docx'}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{\tt{cat}: Printing a file}
+Try this inside \tt{01-files/}:
+\begin{lstlisting}[language=bash]
+$ cat a
+$ cat .a
+$ cat a.txt
+\end{lstlisting}
+\begin{block}{Explanation}
+    \tt{cat} is short for ``concatenate'' (to join together) but it's
+    mostly used to print files.
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\tt{cp, mv, rm}: Relocating a file}
+Try this inside \tt{01-files/}:
+\begin{lstlisting}[language=bash]
+$ cp a b
+$ mv a.txt b.txt
+$ rm b
+\end{lstlisting}
+\begin{block}{Explanation}
+    \begin{itemize}
+        \item ``copy'' \tt{a} into a file called \tt{b}
+        \item ``move'' \tt{a.txt} into a file called \tt{b.txt}
+        \item ``remove'' \tt{b}
+    \end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\tt{cp, mv}: Overwriting and renaming}
+When the destination does not exist, \tt{cp} and \tt{mv} simply create
+that file. \textbf{Otherwise, it is destroyed and overwritten.}
+\newline \newline
+Try this inside \tt{01-files/}:
+\begin{lstlisting}[language=bash]
+$ cp a b      # b is created
+$ cp a a.txt  # a.txt is overwritten
+\end{lstlisting}
+
+When you \tt{mv} a file into a file that doesn't exist, you are essentially
+\textbf{renaming} it. Recall this command from last slide:
+\begin{lstlisting}[language=bash]
+$ mv a.txt b.txt
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+\frametitle{Directories}
+Each of these is a \textbf{directory} (``dir'' for short):
+\begin{itemize}
+    \item \tt{dir/}
+    \item \tt{01-files/}
+    \item \tt{01-files/dir/}
+    \item \tt{01-files/.dir/} (Hidden dir)
+\end{itemize}
+
+\begin{block}{Convention}
+    For clarity, we add a slash (\tt{/}) to the end of a directory in the
+    slides.    However, in reality it often makes no difference.
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\tt{cd, pwd}: Changing directory}
+Try this inside \tt{01-files/}:
+\begin{lstlisting}[language=bash]
+$ cd dir/
+$ pwd
+$ cd ../
+$ pwd
+\end{lstlisting}
+\begin{block}{Explanation}
+    \begin{itemize}
+        \item \tt{cd} is short for ``change directory''
+        \item \tt{pwd} is short for ``print working directory''
+        \item \tt{..} is a special directory. It is the ``parent''
+    \end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\tt{ls}: Listing directories}
+Try this inside \tt{01-files/}:
+\begin{lstlisting}[language=bash]
+$ ls
+$ ls -a
+$ ls -l
+$ ls -a -l
+$ ls dir/
+\end{lstlisting}
+\begin{block}{Explanation}
+    \begin{itemize}
+        \item \tt{ls} is short for ``list''
+        \item \tt{-a} is short for \tt{--all}
+        \item \tt{-l} enables long listing format
+    \end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\tt{mkdir, rm}: Creating and deleting directories}
+Try this inside \tt{01-files/}:
+\begin{lstlisting}[language=bash]
+$ mkdir dir/
+$ rm -r dir/
+$ mkdir -p dir/subdir/
+$ ls dir/
+\end{lstlisting}
+\begin{block}{Explanation}
+    \begin{itemize}
+        \item \tt{mkdir} stands for ``make directory''
+        \item \tt{-r} is short for \tt{--recursive}
+        \item \tt{-p} is short for \tt{--parents}
+    \end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\tt{cp, mv}: Into and out of directories}
+Try this inside \tt{01-files/}:
+\begin{lstlisting}[language=bash]
+$ cp a dir/
+$ mv b.txt dir/
+$ mv b.txt dir/a
+$ mv dir/a b.txt
+\end{lstlisting}
+\begin{block}{Explanation}
+    \begin{itemize}
+        \item Line 1 copies \tt{a} into \tt{dir/}
+        \item Line 2 moves \tt{b.txt} into \tt{dir/}
+        \item Line 3 moves \tt{b.txt} into \tt{dir/} and overwrite
+            \tt{dir/a}
+        \item Line 4 moves \tt{dir/a} back into \tt{b.txt}
+    \end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{File tree}
+Think of any directory as a tree.
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \tikzstyle{every node}=[fill=blue!20,rounded corners]
+        \tikzstyle{edge from parent}=[blue!50,thick,draw]
+        \node {01-files/}[edge from parent fork down]
+            child {node {a.txt}}
+            child {
+                node {dir/}
+                    child {node {subdir/}}
+                    child {node {b.txt}}
+            };
+    \end{tikzpicture}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Paths}
+File $\cup$ directory = \textbf{path}.
+\footnote{At least in the scope of this workshop.}
+\newline \newline
+
+No paths under the same directory can bear the same name.
+These \textbf{cannot} coexist:
+\begin{itemize}
+    \item \tt{01-files/data/}, a directory
+    \item \tt{01-files/data}, a regular file
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Absolute \& relative paths}
+\begin{itemize}
+    \item Paths beginning with \tt{/} are absolute: \tt{/usr/bin/cat}
+    \item Otherwise it is relative: \tt{01-files/}
+\end{itemize}
+
+If you know where you are, you can convert a relative path to an absolute one.
+\begin{example}
+    Your location: \tt{/home/you/} \newline
+    Relative path: \tt{bash-workshop/01-files/} \newline
+    Absolute path: \tt{/home/you/bash-workshop/01-files/}
+\end{example}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wildcard}
+\tt{*} is a character to match any number of (including zero) characters.
+
+\begin{block}{Exception}
+    Hidden paths will remain hidden unless you explicitly specify the dot:
+    \tt{.*}
+\end{block}
+
+\begin{example}
+    Consider a dir containing \tt{a/}, \tt{b/}, \tt{a-copy.txt} and
+    \tt{b.txt}.
+    \begin{itemize}
+        \item \tt{*} matches \tt{a/ b/ a-copy.txt b.txt}
+        \item \tt{a*} matches \tt{a/ a-copy.txt}
+        \item \tt{*.txt} matches \tt{a-copy.txt b.txt}
+    \end{itemize}
+\end{example}
+
+\scriptsize{Technically it's called a glob pattern but who cares. Also there are other
+weird symbols like \tt{?} or \tt{[]} but I swear \tt{*} is most of
+us will ever use.}
+\end{frame}
+
+\begin{frame}
+\frametitle{\tt{.} and \tt{..}}
+Inside every dir\footnote{Except \tt{/}} there are two special dirs:
+\begin{itemize}
+    \item \tt{.} — current dir
+    \item \tt{..} — parent dir
+\end{itemize}
+
+You can use them in relative paths.
+\begin{example}
+    Your location: \tt{/home/you/} \newline
+    Relative path: \tt{../friend/bash-workshop/01-files/} \newline
+    (Note that \tt{/home/you/../friend/} is just \tt{/home/friend/}) \newline
+    Absolute path: \tt{/home/friend/bash-workshop/01-files/}
+\end{example}
+\end{frame}
+
+\begin{frame}<presentation:0>[fragile]
+\frametitle{Quiz: Expand relative paths}
+Suppose your home directory is \tt{/home/sjtu/} and you are currently in
+\tt{/home/sjtu/lbl/}. Expand these relative paths to absolute ones:
+\begin{itemize}
+    \item \tt{lobby}
+    \item \tt{3f/ylm}
+    \item \tt{./elevator}
+    \item \tt{../library/}
+    \item \tt{../../fdu/}
+    \item \verb|~/lawson| % \tt doesn't format ~ well
+\end{itemize}
+\end{frame}
+
+\begin{frame}<presentation:0> % hide frame
+\frametitle{Answer}
+\begin{itemize}
+    \item \tt{/home/sjtu/lbl/lobby}
+    \item \tt{/home/sjtu/lbl/3f/ylm}
+    \item \tt{/home/sjtu/lbl/elevator}
+    \item \tt{/home/sjtu/library/}
+    \item \tt{/home/fdu/}
+    \item \tt{/home/sjtu/lawson}
+\end{itemize}
+\end{frame}
+
+\begin{frame}<presentation:0>
+\frametitle{File commands cheatsheet (part 1)}
+% TODO pwd
+\begin{itemize}
+    \item \tt{cat FILE} — print out FILE
+    \item \tt{cd DIR/} — change current directory to DIR
+    \begin{itemize}
+        \item \tt{cd} — go to home dir
+    \end{itemize}
+    \item \tt{ls DIR/} — list dirs and files in DIR
+    \begin{itemize}
+        \item \tt{ls} — list current dir
+    \end{itemize}
+    \item \tt{pwd} — print where you are
+    \item \tt{mkdir DIR/} — create dir named DIR
+    \item \tt{rm FILE} — remove FILE
+    \begin{itemize}
+        \item \tt{rm -r DIR/} — remove everything in DIR and itself
+        \item \tt{rm -r DIR/*} — remove everything in DIR but not DIR
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}<presentation:0>
+\frametitle{File commands cheatsheet (part 2)}
+\begin{itemize}
+    \item \tt{cp SRC DEST} — copy file named SRC to DEST
+    \begin{itemize}
+        \item \tt{cp SRC DEST\_DIR/} — copy SRC into DEST\_DIR/
+        \item \tt{cp -r SRC\_DIR/ DEST\_DIR/}
+            — copy SRC\_DIR/ and everything inside into DEST\_DIR
+    \end{itemize}
+    \item \tt{mv SRC DEST} — move (rename) SRC to DEST
+    \begin{itemize}
+        \item \tt{mv SRC DEST\_DIR/} — move SRC into DEST\_DIR
+        \item \tt{mv SRC\_DIR/ DEST\_DIR/}
+            — move SRC\_DIR into DEST\_DIR (no \tt{-r} needed)
+    \end{itemize}
+\end{itemize}
+\begin{alertblock}{Warning}
+    \tt{cp} and \tt{mv} will overwrite your files by default.
+    How to avoid that? Check your cheatsheet.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Task}
+Inside \tt{01-files/}:
+\begin{itemize}
+    \item Enter \tt{task/}
+    \item Create \tt{backup/}
+    \item Copy \tt{a.txt} into \tt{dir/}
+    \item Move \tt{dir/} into \tt{backup/}
+    \item Verify if you succeeded using \tt{ls}
+    \item Delete \tt{backup/}
+\end{itemize}
+\end{frame}
+
+\begin{frame}<presentation:0>[fragile]
+\frametitle{Solution}
+\begin{lstlisting}[language=bash]
+$ mkdir backup/
+$ cp a.txt dir/
+$ mv dir/ backup/
+$ ls
+# Output: backup/  a.txt
+$ ls backup/dir/
+# Output: a.txt
+$ rm -r backup/
+\end{lstlisting}
+\end{frame}

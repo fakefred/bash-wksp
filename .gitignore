@@ -1,0 +1,19 @@
+# vim
+.undodir/
+
+# latex cache
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.dvi
+*.nav
+*.out
+*.snm
+*.vrb
+*.toc
+
+# distributable
+*.pdf
+*.tar.gz
+

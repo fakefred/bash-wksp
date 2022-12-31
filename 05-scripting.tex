@@ -1,0 +1,117 @@
+% !TeX root = bash.tex
+\section{V. Bash Scripting}
+\begin{frame}[fragile]
+\frametitle{Bash is a programming language}
+Let's say you want to print many files at once.
+
+Try this one-liner:
+\begin{lstlisting}[language=bash]
+$ for i in {01..05}; do \
+    cat um-logo-$i.txt; \
+done
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Variables}
+A variable in bash is defined this way:
+\begin{lstlisting}[language=bash]
+$ i=0
+$ s='s'
+\end{lstlisting}
+Surprisingly these do \textbf{not} work:
+\begin{lstlisting}[language=bash]
+$ i = 0
+$ s = 's'
+\end{lstlisting}
+Use them with a dollar sign:
+\begin{lstlisting}[language=bash]
+$ echo $i  # 0
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Environment variables}
+Let's say you're downloading something from a completely legal website, and you
+want the traffic to go through your local proxy server for completely legal reasons.
+You need to set an \textbf{environment variable}:
+\begin{lstlisting}[language=bash]
+# your local proxy
+$ export HTTPS_PROXY=http://localhost:8080/
+# download the thing
+$ curl https://legal.website/legal-thing/
+\end{lstlisting}
+This does the same thing, but subsequent commands do not have access to it:
+\begin{lstlisting}[language=bash]
+$ HTTPS_PROXY=http://localhost:8080/ \
+    curl https://legal.website/legal-thing/
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Note about long commands}
+In this section, commands can be rather long. You may type them in a command line,
+or you can edit a shell script (\tt{something.sh}) and run it
+(\tt{bash ./something.sh}).
+\begin{table}
+    \begin{tabular}{m{12em} cc}
+        \hline
+        & Type in CLI & Run a script file \\
+        \hline
+        \verb|\| at the end of line & Necessary & Unnecessary \\
+        \verb|;| between two commands on the same line & Necessary & Necessary \\
+        \hline
+    \end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exit status}
+When a program exits, it emits an \textbf{exit status} (also called exit code).
+By convention, an exit status of 0 implies success, and everything else means
+something went wrong (consult respective man pages).
+
+\begin{block}{Note}
+    When you \tt{return 0;} at the end of \tt{int main()}, you are
+    emitting an exit status of zero.
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\textbf{if} statements}
+\begin{lstlisting}[language=bash]
+if COMMAND; then
+    # CODE
+elif COMMAND2; then
+    # CODE2
+else
+    # CODE3
+fi
+\end{lstlisting}
+where \tt{COMMAND} can be
+\begin{itemize}
+    \item A CLI command; \tt{CODE} will run if exit status is zero
+    \item \tt{[[ CONDITION ]]} where you compare strings with \tt{==}
+        or numbers with \tt{-eq}
+\end{itemize}
+\begin{block}{Note}
+    This is way too much to unpack here, but you can check out
+    \url{https://www.gnu.org/software/bash/manual/html_node/Conditional-Constructs.html#index-_005b_005b}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\textbf{for} statements}
+\begin{lstlisting}[language=bash]
+for VARIABLE in LIST; do
+    # CODE
+    # use VARIABLE with $VARIABLE
+done
+\end{lstlisting}
+where \tt{LIST} is commonly a range, e.g. \verb|{01..10}|, or the output of
+another command, e.g. \verb|$(ls)|.
+\begin{block}{Note}
+    In bash, a string can be split into a list with respect to whitespace.
+    Therefore, \verb|$(ls)| only works as expected if no path contains whitespace.
+\end{block}
+\end{frame}

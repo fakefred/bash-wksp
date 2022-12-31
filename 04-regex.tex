@@ -1,0 +1,218 @@
+% !TeX root = bash.tex
+\section{IV. Regex}
+\begin{frame}
+\frametitle{What's a regex}
+\textbf{Regex} is a portmanteau of ``regular expressions''.
+It is a string to search for patterns in text. \newline
+
+It is so powerful that text cannot define it. \newline
+
+However, it is not fit for every purpose, the same way you wouldn't
+drive a car to visit your downstair neighbor, a Hawaiian volcano, or
+the edge of the universe.\newline
+
+Use it wisely.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{What can (and can't) a regex do}
+A regex can (or at least attempt to):
+\begin{itemize}
+    \item Match a cell phone number: \verb|[0-9]{11}|
+    \item Match a .com domain: \verb|([A-Za-z0-9_\-]+\.)+com|
+    \item Match \textit{Star Wars} subtitles but not \textit{Star Trek}:
+        \verb!m | [tn]|b!\footnote{Credit: \url{https://xkcd.com/1313/}}
+\end{itemize}
+It cannnot:
+\begin{itemize}
+    \item Understand emotion (you want NLP)
+    \item Generate AI art (you want stable diffusion)
+    \item Moderate a Minecraft server (you want a real human)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{When to use regex?}
+Where a simple substring match won't do, and a program is an overkill, regex is
+your friend. \newline
+
+Imagine you want to find an email by subject.
+\begin{itemize}
+    \item Case 1: you want everything that contains ``VV256''. Solution: just
+        search for ``VV256''.
+    \item Case 2: you want emails written in Spanish. You might want to use
+        some online translation APIs and definitely need to write code.
+    \item Case 3: you want emails that contain a JI course code in the ECE
+        category. This calls for regex.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Regex is a mess}
+\begin{block}{Quote}
+I define UNIX as 30 definitions of regular expressions living under one roof.
+\begin{flushright}
+    — Donald Knuth\footnote{Digital Typography, ch. 33, p. 649 (1999)}
+\end{flushright}
+\end{block}
+
+Of all the standards, two stand dominant:
+\textbf{ERE} (Extended RegEx, POSIX compliant), and
+\textbf{PCRE} (Perl Compatible RegEx, used in Perl and Python).
+Our focus today will be ERE.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Common patterns (part 1)}
+\begin{table}
+    \centering
+    \begin{tabular}{ll}
+        \verb|.|            & any character \\
+        \verb|\.|           & a literal dot \\
+        \verb|[aeiou]|      & any vowel \\
+        \verb|[^aeiou]|     & anything but a vowel \\
+        \verb|[0-9]|        & any digit \\
+        \verb|[A-Za-z]|     & any letter \\
+        \verb|^|            & beginning of line \\
+        \verb|$|            & end of line \\
+        \verb|A?|           & zero or one A \\
+        \verb|A+|           & one or more A's \\
+        \verb|A*|           & zero or more A's \\
+        \verb|A{,6}|        & up to six A's \\
+        \verb|A{4,6}|       & four to six A's \\
+        \verb!(ls|cd|rm)!   & one of ls, cd, and rm
+    \end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Common patterns (part 2)}
+\begin{table}
+    \centering
+    \begin{tabular}{ll}
+        \verb|\w|           & \verb|[A-Za-z0-9_]| \\
+        \verb|\W|           & anything that does not match \verb|\w| \\
+        \verb|\s|           & whitespace (space, tab, linebreak, etc) \\
+        \verb|\S|           & anything but whitespace \\
+        \verb|\b|           & boundary of a word \\
+        \verb|\B|           & you guessed it
+    \end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Quiz: Does it match?}
+What strings does this regex match? \newline
+
+\Large \verb!(^cat|cat$)! \normalsize
+
+\begin{itemize}
+    \item \verb|cat|                      % yes
+    \item \verb|^cat$|                    % no
+    \item \verb|cats|                     % yes
+    \item \verb|cat /etc/fstab|           % yes
+    \item \verb|I have a cat.|            % no
+    \item \verb|Cats are the best.|       % no
+    \item \verb|Concatenate these files|  % no
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Quiz: Does it match?}
+What matches \tt{+86 021-54749110} but not \tt{+86021-54749110}?
+\begin{itemize}
+    \item \verb|\+86\s+[0-9]{3}-[0-9]{8}|
+    \item \verb|\+86\s*[0-9]{3}-[0-9]{8}| % this one
+\end{itemize}
+
+What does \Large \verb|[um]jicanvas.com| \normalsize match?
+\begin{itemize}
+    \item \tt{umjicanvas.com}
+    \item \tt{jicanvas.com}
+    \item \tt{ujicanvasecom} % only this one
+\end{itemize}
+
+\begin{block}{Challenge}
+    How to fix this regex? \pause \verb|(um)?jicanvas\.com|
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{But how to use a regex, anyway?}
+Try this in \tt{04-regex/}:
+\begin{lstlisting}[language=bash]
+$ grep -E '.+\..+@sjtu.edu.cn' faculty
+\end{lstlisting}
+\pause
+\begin{block}{Observation}
+    The regex matches all email addresses in the file \tt{faculty}
+    that look like ``firstname.lastname@sjtu.edu.cn''.
+\end{block}
+\begin{block}{Challenge}
+    Can you come up with something shorter?
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{One more example}
+\begin{lstlisting}[language=bash]
+$ grep -o -E '^[^@]{,8}' faculty
+\end{lstlisting}
+\pause
+\begin{block}{Observation}
+    This regex truncates each line after the 8th character or before @,
+    whichever comes first.
+\end{block}
+\begin{block}{Explanation}
+    \begin{tabular}{ll}
+        \verb|^|    & From beginning of each line \\
+        \verb|[^@]| & Match all characters except @ \\
+        \verb|{,8}| & Until we reach max length 8
+    \end{tabular}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Your turn}
+Extract all course codes from \tt{04-regex/courses}. \newline
+
+\begin{tabular}{lcl}
+    VG100 Introduction to Engineering & & VG100 \\
+    VM020 Machineshop Training & $\Longrightarrow$ & VM020 \\
+    VP140 Physics I & & VP140 \\
+    VP141 Physics Lab I & & VP141
+\end{tabular}
+\pause
+\begin{block}{Solution (one version)}
+    \verb|grep -oE 'V[A-Z][0-9]+' courses|
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Find and replace with \tt{sed}}
+\tt{sed} is a powerful tool for transforming text.
+We will be using one very specific syntax:
+\begin{lstlisting}[language=bash]
+$ COMMAND | sed 's/FIND/REPLACE/'
+\end{lstlisting}
+Use \tt{-E} for regex. This command redacts all the IPv4 addresses in the
+file \tt{ipv4}:
+\begin{lstlisting}[language=bash]
+$ sed -E 's/([0-9]{1,3}\.){3}[0-9]{1,3}/redacted/g' \
+    ipv4
+\end{lstlisting}
+\begin{block}{Note}
+    Without the \tt{g} at the end, \tt{sed} will skip to the
+    next line after only one replacement.
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Groups in regex}
+What if you only want to redact the subnet (i.e. last part) of the IP addresses?
+\textbf{Capturing groups} will be useful.
+\begin{lstlisting}[language=bash]
+$ sed -E 's/(([0-9]{1,3}\.){3})[0-9]{1,3}/\1xxx/g' \
+    ipv4
+\end{lstlisting}
+\end{frame}

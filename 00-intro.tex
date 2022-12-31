@@ -1,0 +1,87 @@
+% !TeX root = bash.tex
+\section{Intro}
+\begin{frame}
+\frametitle{A brief history of bash}
+\begin{figure}[h]
+    \centering
+    \includegraphics[height=3cm]{bash_logo}
+\end{figure}
+\begin{itemize}
+    \item Born: 1989
+    \item Probably played Pokémon on the Game Boy
+    \item Is an umbrella term for zsh, fish, …
+    \item Runs on Unix-like environments
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{A brief history of Unix}
+\begin{itemize}
+    \item Born: 1969
+    \item Probably listened to Michael Jackson
+    \item Gave rise to Linux, BSD, and Mac OS
+    \item We call them ``Unix-like''
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Unix: The Good Part}
+The Unix philosophy (paraphrased):
+\begin{itemize}
+    \item Stores data in plain text
+    \item Hierarchical file system
+    \item Everything is a file
+    \item One tool does one thing
+    \item Tools together strong
+\end{itemize}
+\begin{block}{Quote}
+The power of a system comes more from the relationships among programs than
+from the programs themselves.
+\begin{flushright}
+    — Brian Kernighan and Rob Pike
+    \footnote{The UNIX Programming Environment. 1984. viii}
+\end{flushright}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Unix: The Chaotic Part}
+``Unix'' is mostly created by these three groups of people who routinely
+disagree with each other:\footnote{Not convinced? Try \tt{man ps}.}
+\begin{figure}[h]
+    \centering
+    \includegraphics[height=3cm]{gnu_linux_bsd}
+    \caption{GNU, Linux, and BSD\footnote{Yes, I know there are many BSDs}}
+\end{figure}
+Despite this, they all hate Microsoft.
+
+We will be talking about GNU today.
+\end{frame}
+
+\begin{frame}
+\frametitle{Before we start}
+\begin{itemize}
+    \item This is \textbf{not} a Linux workshop
+        (although I encourage you to use it)
+    \item This is not a vim workshop either
+    \item You should use a \tt{monospace} font
+    \item PowerShell is \textbf{not} bash. Anyone caught using it will be
+        kicked out of the venue.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Conventions in slides}
+\begin{itemize}
+    \item \tt{\$} indicates a \textbf{bash command}.
+        Do not type the \tt{\$}.
+    \item \tt{\#} indicates a \textbf{comment}.
+        Do not type it or anything after it.
+\end{itemize}
+Try to execute these commands:
+\begin{lstlisting}[language=bash]
+$ echo hello
+# this is a comment
+$ echo world  # also a comment
+\end{lstlisting}
+\end{frame}
