@@ -1,4 +1,4 @@
-TEX_SRC=bash-1
+TEX_SRC=bash-1 bash-2
 
 all: tex
 
