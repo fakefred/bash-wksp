@@ -1,0 +1,284 @@
+VG100	Introduction to Engineering
+VG101	Introduction to Computers and Programming
+VM020	Machineshop Training
+VP140	Physics I
+VP141	Physics Lab I
+VP160	Honors Physics I
+VR123	Novel into Film
+VR124	Fashion, Fiction and Feminism
+VR140	Comparative Government and Politics
+VR160	Introduction to World Politics
+VV115	Calculus I
+VV116	Calculus II
+VV156	Applied Calculus II
+VV186	Honors Mathematics II
+VY100	Academic Writing I
+VZ102	Introduction to Chinese Culture
+VZ104	Introduction to Chinese Language
+VC209	Chemistry
+VC210	Chemistry
+VC211	Chemistry Laboratory
+VC230	Honors Chemistry
+VE203	Discrete Mathematics
+VE215	Introduction to Circuits
+VE216	Introduction to Signals and Systems
+VE230	Electromagnetics I
+VE270	Introduction to Logic Design
+VE280	Programming and Introductory Data Structures
+VE281	Data Structures and Algorithms
+VK242	Physics of Materials
+VK250	Principles of Engineering Materials
+VM211	Introduction to Solid Mechanics
+VM235	Thermodynamics I
+VM240	Introduction to Dynamics and Vibrations
+VM250	Design and Manufacturing I
+VP240	Physics II
+VP241	Physics Lab II
+VP260	Honors Physics II
+VR202	Introduction to Philosophy
+VR203	Food in Modern East Asian History
+VR204	Modern Asia – Colonialism, Anti-colonialism, and State Formation
+VR205	American Ways: US Culture
+VR206	China in the Early Modern World
+VR208	Business and Nature Environment
+VR209	The rise of scientific medicine: a global perspective
+VR222	Great Books in World Literature
+VR223	Arabian Nights in British Literature
+VR236	Film Art and History
+VR238	British Empire and “Informal” Imperialism in the Nineteenth-Century
+VR241	Comparative Literature: Fairy Tales
+VR242	Happiness and the Meaning of Life
+VR246	Introduction to Comics and Graphic Novels
+VR253	Culture，Technology and Silicon Valley
+VR258	The History of Modern China’s Foreign Relations
+VR259	Memory: A New Approach to China’s 20th Century History
+VR260	Introduction to Chinese Civilization
+VR262	Introduction to the Philosophy of Religion
+VR265	Culture，Technology and Silicon Valley
+VR275	The Western Mind in Revolution
+VR290	Home and Homeland in Asian American Literature
+VR291	The Otherworlds of Fantasy
+VV214	Linear Algebra
+VV215	Calculus III
+VV216	Calculus IV
+VV255	Applied Calculus III
+VV256	Honors Calculus IV
+VV285	Honors Mathematics III
+VV286	Honors Mathematics IV
+VY200	Academic Writing II
+VY223	Creative Writing
+VY240	Introduction to Poetry
+VZ200	Comprehensive Chinese II
+VE300	Technical Communication for Electrical and Computer Engineering
+VE311	Electronic Circuits
+VE312	Digital Integrated Circuits
+VE320	Introduction to Semiconductor Devices
+VE330	Electromagnetics II
+VE334	Principles of Optics
+VE353	Introduction to Communication Systems
+VE370	Introduction to Computer Organization
+VE373	Design of Microprocessor Based Systems
+VK330	Thermodynamics of Materials
+VK335	Kinetics and Transitions in Material Engineering
+VK350	Structure of Materials
+VK360	Materials Lab I
+VK365	Materials Lab II
+VM305	Introduction to Finite Elements in Mechanical Engineering
+VM311	Strength of Materials
+VM320	Fluid Mechanics I
+VM335	Heat Transfer
+VM350	Design and Manufacturing II
+VM360	Automatic Control
+VM382	Mechanical Behavior of Materials
+VM384	Engineering Project Management
+VM395	Mechanical Engineering Laboratory I
+VP390	Modern Physics
+VR318	Modern PhysicsScience Fiction
+VR320	American Short Fiction
+VR334	Performance Technology
+VR340	Shakespeare Studies
+VR353	American Culture
+VR355	Contemporary Moral Problems
+VR363	Chinese Society in Contemporary Chinese Cinema
+VR364	Literature and the Environment
+VR367	Global Enterprise and Sustainable Development
+VR369	Politics of International Economic Relations
+VR380	Topics in Asian Studies: Political and Economic Development in Pacific Asia
+VX351	Advanced Branding and Brand Management
+VY322	Literary Translation
+VE401	Probabilistic Methods in Engineering
+VE406	Applied Regression Analysis using R
+VE411	Microwave Circuits I
+VE413	Monolithic Amplifier Circuits
+VE414	Bayesian Analysis
+VE415	Introduction to MEMS
+VE420	Physical Principles Underlying Smart Devices
+VE427	VLSI Design I
+VE434	Principles of Photonics
+VE438	Advanced Lasers and Optics Laboratory
+VE449	Mobile Applications for Entrepreneurs
+VE450	Capstone Design
+VE451	Digital Signal Processing and Analysis
+VE452	Digital Signal Processing Design Laboratory
+VE455	Digital Communication Signals and Systems
+VE458	Biomedical Instrumentation and Design
+VE460	Control Systems Analysis and Design
+VE461	Embedded Control Systems
+VE470	Computer Architecture
+VE475	Introduction to Cryptography
+VE477	Introduction to Algorithms
+VE478	Logic Circuit Synthesis and Optimization
+VE482	Introduction to Operating Systems
+VE483	Compiler Construction
+VE484	Data Mining
+VE487	Interactive Computer Graphics
+VE488	Data Mining and Machine Learning
+VE489	Computer Networks
+VE490	Undergraduate Research
+VE492	Introduction to Artificial Intelligence
+VE496	Advanced Technical Communication
+VE498	Special Topics
+VG496	Professional Ethics
+VK480	Materials and Engineering Design
+VK481	Sustainable Design of Materials and Engineering
+VK482	Materials Processing Design
+VK489	Materials Processing Design
+VM412	Advanced Strength of Materials
+VM418	Mechanics of Composite and Microstructured Media
+VM421	Thermal-Fluids Systems Design
+VM432	Combustion
+VM433	Advanced Energy Solution
+VM434	Materials for Energy Conversion
+VM440	Intermediate Dynamics and Vibration
+VM450	Design and Manufacturing III
+VM452	Design for Manufacturability
+VM458	Automotive Engineering
+VM461	Automatic Control
+VM466	Statistical Quality Control
+VM467	Introduction to Robotics
+VM481	Manufacturing Processes
+VM482	Machining Process
+VM490	Undergraduate Research
+VM495	Mechanical Engineering Laboratory II
+VR440	Chinese Legal History
+VV417	Linear Algebra
+VV454	Boundary Value Problems for Partial Differential Equations
+VV471	Introduction to Numerical Methods
+VX401	Entrepreneurship
+VX402	Managing a Business
+VX420	Business Basics for Entrepreneurs
+VX421	Leadership and Technology Management
+VE501	Probability and Random Processes
+VE504	Solid State Physics
+VE506	Selected Topics in Nanotechnology
+VE507	Semiconductor Optoelectronic Materials
+VE508	Nonlinear &amp; Ultrafast Optics
+VE509	Semiconductor Physics
+VE510	Principles of Semiconductor Devices
+VE512	Amorphous and Microcrystalline Semiconductor Thin Film Devices
+VE515	Electrical, Optical and Magnetic Properties of Materials
+VE517	Physical Processes in Plasmas
+VE520	Electronic and Optical Properties of Semiconductors
+VE521	High Speed Transistors
+VE522	Analog Integrated Circuits
+VE523	Digital Integrated Technology
+VE525	Advanced Solid State Microwave Circuits
+VE527	Computer-Aided Design of Integrated Circuits
+VE530	Electromagnetic Theory I
+VE531	Antenna Theories and Design
+VE534	Optics and Photonics
+VE535	Optical Information Processing
+VE536	Classical Statistical Optics
+VE538	Optical Waves in Crystals
+VE539	Lasers
+VE540	Applied Quantum Mechanics I
+VE541	Applied Quantum Mechanics II
+VE550	Information Theory
+VE551	Matrix Methods for Signal Processing, Data Analysis and Machine Learning
+VE552	Fiber Optics and Biomedical Optics
+VE554	Introduction to Digital Communication and Coding
+VE555	Digital Communication Theory
+VE556	Image Processing
+VE558	Stochastic Control and Reinforcement Learning
+VE559	Advanced Signal Processing
+VE560	Linear Systems
+VE562	Nonlinear Systems and Control
+VE564	Statistical Signal Processing
+VE570	Parallel Computer Architecture
+VE571	Principles of Real-Time Computing
+VE572	Methods and Tools for Big Data
+VE573	Microarchitecture
+VE578	Computer-Aided Design Verification of Digital Systems
+VE579	Digital System Testing
+VE581	Convolutional Neural Networks for Visual Recognition
+VE582	Advanced Operating Systems
+VE586	Advanced Computer Networks
+VE587	Parallel Computing
+VE588	Computer and Network Security
+VE589	Data Networks and Queuing Theory
+VE593	Problem Solving with AI Techniques
+VE595	Master Thesis
+VG500	Technical Communication
+VG501	Introduction to Graduate Technical Communication
+VG502	Technical Discourse
+VG503	Graduate Thesis Writing
+VM505	Finite Element Methods
+VM506	Selected Topics in Nanotechnology
+VM508	Introduction to Soft Matter Physics
+VM509	Battery Materials: Fundamentals and Applications
+VM510	Advanced Structural Analysis
+VM511	Foundation of Solid Mechanics
+VM512	Theory of Elasticity
+VM513	Continuum Mechanics
+VM514	Non-Linear Fracture Mechanics
+VM515	Electrical, Optical and Magnetic Properties of Materials
+VM516	Energy Methods in Solid Mechanics
+VM517	Mechanical Properties of Polymers
+VM518	Advanced Mechanics of Composite Materials
+VM519	Theory of Plasticity
+VM520	Advanced Fluid Mechanics
+VM521	Compressible Flow
+VM523	Computational Fluid Dynamics
+VM524	Turbulence
+VM527	Multi-phase Flow
+VM528	Experimental Methods in Multi-phase Flow
+VM530	Advanced Heat Transfer
+VM531	Advanced Conduction and Radiation Heat Transfer
+VM532	Advanced Convection
+VM535	Thermodynamics III
+VM540	Advanced Methods of Vibration Analysis
+VM541	Mechanical Vibrations
+VM543	Analytical Dynamics
+VM551	Mechanisms Design
+VM552	Mechatronic System Design
+VM553	Microelectromechanical Systems
+VM554	Computer Aided Design Methods
+VM555	Engineering Optimization
+VM564	Linear Systems
+VM565	Structural, Physical and Chemical Characterization of Materials
+VM566	Dynamics and Control of Connected Vehicles
+VM567	Introduction to Robotics
+VM571	Machine Learning in Molecular and Materials Sciences
+VM583	Manufacturing Processes and Systems
+VM584	Control of Manufacturing Systems
+VM586	Laser Materials Processing
+VM595	Master Thesis
+VV556	Methods of Applied Mathematics I
+VV557	Methods of Applied Mathematics II
+VV570	Introduction to Engineering Numerical Analysis
+VE650	Coding Theory
+VE655	Wireless Communication Theory
+VE662	Advanced Topics in Controls
+VE663	Advanced topics in control II
+VE666	Millimeter-wave and Terahertz Wireless Communications
+VE689	Wireless Networks
+VE693	Deep Reinforcement Learning
+VE695	Doctoral Thesis
+VM611	Constitutive Modeling and Constitutive Updates of Solids
+VM641	Advanced Methods of Vibration Analysis
+VM643	Flexible Multibody Dynamics
+VM645	Wave Propagation in Elastic Solids
+VM648	Nonlinear Oscillations and Stability
+VM660	Engineering Decision Making
+VM695	Doctoral Thesis
+VM699	Special topics in thermal and fluid science
