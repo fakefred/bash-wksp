@@ -19,8 +19,8 @@ $ head -n 5 longfile.txt
 \end{lstlisting}
 \begin{tabular}{ll}
     \tt{head}            & Executable file somewhere \\
-    \tt{-n}                & Option (aka flag) \\
-    \tt{5}                & Argument to \tt{-n} \\
+    \tt{-n}              & Option (aka flag) \\
+    \tt{5}               & Argument to \tt{-n} \\
     \tt{longfile.txt}    & Argument to \tt{head}
 \end{tabular}
 \end{frame}
@@ -33,10 +33,10 @@ Anatomy of a command:
 $ ls -Rr --ignore='*.o'
 \end{lstlisting}
 \begin{tabular}{ll}
-    \tt{ls}            & Executable in \tt{\$PATH} \\
-    \tt{-Rr}        & Two options: \tt{-R -r} \\
-    \tt{--ignore=}    & Long option \\
-    \tt{'*.o'}        & Argument to \tt{--ignore}
+    \tt{ls}             & Executable in \tt{\$PATH} \\
+    \tt{-Rr}            & Two options: \tt{-R -r} \\
+    \tt{--ignore=}      & Long option \\
+    \tt{'*.o'}          & Argument to \tt{--ignore}
 \end{tabular}
 \begin{block}{Notes}
     \begin{itemize}
@@ -84,8 +84,9 @@ $ diff sway.1.conf sway.2.conf
 \end{lstlisting}
 Congratulations, you just learned how to use \tt{diff}!
 \newline \newline
+Now, what does this command do?
 \begin{lstlisting}[language=bash]
-$ diff sway.1.conf sway.2.conf
+$ comm -12 sway.1.conf sway.2.conf
 \end{lstlisting}
 \end{frame}
 

@@ -2,16 +2,9 @@
 \section{IV. Regex}
 \begin{frame}
 \frametitle{What's a regex}
-\textbf{Regex} is a portmanteau of ``regular expressions''.
-It is a string to search for patterns in text. \newline
-
-It is so powerful that text cannot define it. \newline
-
-However, it is not fit for every purpose, the same way you wouldn't
-drive a car to visit your downstair neighbor, a Hawaiian volcano, or
-the edge of the universe.\newline
-
-Use it wisely.
+\textbf{Regex}: ``regular expressions''
+\newline \newline
+It is a string… to search for strings.
 \end{frame}
 
 \begin{frame}[fragile]
@@ -33,18 +26,25 @@ It cannnot:
 
 \begin{frame}
 \frametitle{When to use regex?}
-Where a simple substring match won't do, and a program is an overkill, regex is
-your friend. \newline
-
-Imagine you want to find an email by subject.
-\begin{itemize}
-    \item Case 1: you want everything that contains ``VV256''. Solution: just
-        search for ``VV256''.
-    \item Case 2: you want emails written in Spanish. You might want to use
-        some online translation APIs and definitely need to write code.
-    \item Case 3: you want emails that contain a JI course code in the ECE
-        category. This calls for regex.
-\end{itemize}
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \node (can-low)     at ( 0,  1)   {};
+        \node (can-high)    at ( 7,  1)   {};
+        \node (have-low)    at ( 0,  2)   {};
+        \node (have-high)   at (10,  2)   {};
+        \node (should-low)  at ( 1, -0.2) {};
+        \node (should-high) at ( 5, -0.2) {};
+        \draw[left color=green, right color=red] (0, 0) rectangle (10, 0.8);
+        \draw[line width=5pt] (1, 0) rectangle (5, 0.8);
+        \draw[decorate, decoration=brace] (can-low) -- (can-high)
+            node[text centered, midway, above] {Problems regex can solve};
+        \draw[decorate, decoration=brace] (have-low) -- (have-high)
+            node[text centered, midway, above] {Problems people have tried to solve with regex};
+        \draw[decorate, decoration={brace, mirror}] (should-low) -- (should-high)
+            node[text centered, midway, below] {Problems regex is actually good for};
+    \end{tikzpicture}
+\end{figure}
 \end{frame}
 
 \begin{frame}
@@ -56,9 +56,11 @@ I define UNIX as 30 definitions of regular expressions living under one roof.
 \end{flushright}
 \end{block}
 
-Of all the standards, two stand dominant:
-\textbf{ERE} (Extended RegEx, POSIX compliant), and
-\textbf{PCRE} (Perl Compatible RegEx, used in Perl and Python).
+Two dominant standards:
+\begin{itemize}
+    \item \textbf{ERE} (Extended RegEx, POSIX compliant)
+    \item \textbf{PCRE} (Perl Compatible RegEx, used in Perl and Python)
+\end{itemize}
 Our focus today will be ERE.
 \end{frame}
 
@@ -128,11 +130,10 @@ What matches \tt{+86 021-54749110} but not \tt{+86021-54749110}?
 What does \Large \verb|[um]jicanvas.com| \normalsize match?
 \begin{itemize}
     \item \tt{umjicanvas.com}
-    \item \tt{jicanvas.com}
-    \item \tt{ujicanvasecom} % only this one
+    \item \tt{jicanvas.com} % neither
 \end{itemize}
 
-\begin{block}{Challenge}
+\begin{block}{Quiz}
     How to fix this regex? \pause \verb|(um)?jicanvas\.com|
 \end{block}
 \end{frame}
@@ -184,7 +185,9 @@ Extract all course codes from \tt{04-regex/courses}. \newline
 \end{tabular}
 \pause
 \begin{block}{Solution (one version)}
-    \verb|grep -oE 'V[A-Z][0-9]+' courses|
+\begin{lstlisting}[language=bash]
+$ grep -oE 'V[A-Z][0-9]+' courses
+\end{lstlisting}
 \end{block}
 \end{frame}
 

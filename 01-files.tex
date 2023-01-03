@@ -155,8 +155,7 @@ $ mv dir/a b.txt
     \begin{itemize}
         \item Line 1 copies \tt{a} into \tt{dir/}
         \item Line 2 moves \tt{b.txt} into \tt{dir/}
-        \item Line 3 moves \tt{b.txt} into \tt{dir/} and overwrite
-            \tt{dir/a}
+        \item Line 3 moves \tt{b.txt} into \tt{dir/} and overwrite \tt{dir/a}
         \item Line 4 moves \tt{dir/a} back into \tt{b.txt}
     \end{itemize}
 \end{block}
@@ -221,13 +220,15 @@ If you know where you are, you can convert a relative path to an absolute one.
 \end{block}
 
 \begin{example}
-    Consider a dir containing \tt{a/}, \tt{b/}, \tt{a-copy.txt} and
-    \tt{b.txt}.
-    \begin{itemize}
-        \item \tt{*} matches \tt{a/ b/ a-copy.txt b.txt}
-        \item \tt{a*} matches \tt{a/ a-copy.txt}
-        \item \tt{*.txt} matches \tt{a-copy.txt b.txt}
-    \end{itemize}
+    \begin{table}
+        \centering
+        \begin{tabular}{lcccc}
+                       & \tt{a/}    & \tt{b/}    & \tt{a-copy.txt} & \tt{b.txt} \\ \hline
+            \tt{*}     & \checkmark & \checkmark & \checkmark      & \checkmark \\
+            \tt{a*}    & \checkmark &            & \checkmark      &            \\
+            \tt{*.txt} &            &            & \checkmark      & \checkmark \\
+        \end{tabular}
+    \end{table}
 \end{example}
 
 \scriptsize{Technically it's called a glob pattern but who cares. Also there are other

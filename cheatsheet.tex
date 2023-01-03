@@ -55,4 +55,26 @@
     \tt{C} & Abort                                                 \\
     \tt{R} & Search history
 \end{tabular}
+
+\section{Regex}
+\begin{tabular}{ll}
+    \verb|.|            & any character                             \\
+    \verb|\.|           & literal dot                               \\
+    \verb|[aeiou]|      & any vowel                                 \\
+    \verb|[^aeiou]|     & anything but a vowel                      \\
+    \verb|[0-9]|        & any digit                                 \\
+    \verb|[A-Za-z]|     & any letter                                \\
+    \verb|^|            & beginning of line                         \\
+    \verb|$|            & end of line                               \\
+    \verb|A?|           & 0 or 1 A                                  \\
+    \verb|A+|           & $\ge 1$ A's                               \\
+    \verb|A*|           & $\ge 0$ A's                               \\
+    \verb|A{,6}|        & 0--6 A's                                  \\
+    \verb|A{4,6}|       & 4--6 A's                                  \\
+    \verb!(ls|cd|rm)!   & one of ls, cd, and rm                     \\
+    \verb|\w|           & Letters, digits, \_                       \\
+    \verb|\W|           & Anything but \verb|\w|                    \\
+    \verb|\s|           & Whitespace                                \\
+    \verb|\b|           & Boundary of word
+\end{tabular}
 \end{document}
