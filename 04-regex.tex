@@ -78,8 +78,8 @@ Our focus today will be ERE.
         \verb|^|            & beginning of line \\
         \verb|$|            & end of line \\
         \verb|A?|           & zero or one A \\
-        \verb|A+|           & one or more A's \\
-        \verb|A*|           & zero or more A's \\
+        \verb|A+|           & one or more A's (\emph{Positive closure}) \\
+        \verb|A*|           & zero or more A's (\emph{Kleene closure}) \\
         \verb|A{,6}|        & up to six A's \\
         \verb|A{4,6}|       & four to six A's \\
         \verb!(ls|cd|rm)!   & one of ls, cd, and rm
@@ -133,7 +133,7 @@ What does \Large \verb|[um]jicanvas.com| \normalsize match?
     \item \tt{jicanvas.com} % neither
 \end{itemize}
 
-\begin{block}{Quiz}
+\begin{block}{Challenge\footnote{Want more challenges? Try \url{https://alf.nu/RegexGolf}!}}
     How to fix this regex? \pause \verb|(um)?jicanvas\.com|
 \end{block}
 \end{frame}
