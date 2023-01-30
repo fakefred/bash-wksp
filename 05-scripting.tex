@@ -122,7 +122,7 @@ fi
 \begin{lstlisting}[language=bash]
 # if-comp.sh
 i=3
-if [ $i -eq 3 ]; then
+if [[ $i -eq 3 ]]; then
     echo "i is 3"
 fi
 \end{lstlisting}
@@ -138,10 +138,10 @@ Other operators:
     \end{tabular}
 \end{table}
 \begin{block}{Note}
-    Spaces after \tt{[} and before \tt{]} are \textbf{required}.
+    Spaces after \verb|[[| and before \verb|]]| are \textbf{required}.
     \footnote{
-        Trivia: In bash the \tt{[ ]} is built-in, but in some shells
-        it's an executable called \tt{/usr/bin/[}.
+        Trivia: In bash the \tt{[[ ]]} is built-in, but in some shells
+        it's an executable called \tt{/usr/bin/[[}.
         See \url{https://serverfault.com/questions/138951/what-is-usr-bin}
     }
 \end{block}
@@ -166,9 +166,9 @@ fi
 \begin{lstlisting}[language=bash]
 # if-str.sh
 str="something"
-if [ -z $str ]; then
+if [[ -z $str ]]; then
     echo "str is empty"
-elif [ $str = "something" ]; then
+elif [[ $str = 'something' ]]; then
     # = and == are both ok
     echo "str is 'something'"
 fi
@@ -188,7 +188,7 @@ Complementary operators to \tt{-z} and \tt{=}:
 \begin{lstlisting}[language=bash]
 # if-file.sh
 file="something.txt"
-if [ -e $file ]; then
+if [[ -e $file ]]; then
     echo "$file exists"
 fi
 \end{lstlisting}
@@ -319,7 +319,7 @@ IFS=$'\n'
 max=0
 for line in $(cat obf.txt); do
 	year=$(echo $line | grep -oE '^[0-9]{8}')
-	if [ $year -gt $max ]; then
+    if [[ $year -gt $max ]]; then
 		echo $line
 		max=$year
 	fi

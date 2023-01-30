@@ -38,6 +38,7 @@
     \tt{grep -i}            & Ignore case                           \\
     \tt{grep -v}            & Invert match                          \\
     \tt{grep -o}            & Only show matched part                \\
+    \tt{grep -E}            & Extended regex                        \\
     \tt{sort file}          & Sort lines in file                    \\
     \tt{sort -f}            & Ignore case                           \\
     \tt{sort -n}            & Numerical order                       \\
@@ -56,7 +57,7 @@
     \tt{R} & Search history
 \end{tabular}
 
-\section{Regex}
+\section{Regex (ERE)}
 \begin{tabular}{ll}
     \verb|.|            & any character                             \\
     \verb|\.|           & literal dot                               \\
@@ -82,7 +83,7 @@
 \end{tabular}
 
 \section{Scripting}
-\tt{if [ TEST ]; then BODY; fi}
+\tt{if [[ TEST ]]; then BODY; fi}
 \vspace{0.3cm}
 
 \begin{tabular}{ll}
@@ -95,7 +96,10 @@
     \verb|-z $a|        & empty string                              \\
     \verb|-n $a|        & not empty string                          \\
     \verb|$a = $b|      & strings are the same                      \\
-    \verb|$a != $b|     & strings are different
+    \verb|$a != $b|     & strings are different                     \\
+    \verb|-e $file|     & file exists                               \\
+    \verb|-f $file|     & is regular file                           \\
+    \verb|-d $dir|      & is directory
 \end{tabular}
 
 \vspace{0.5cm}
