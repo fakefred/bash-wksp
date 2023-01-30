@@ -3,12 +3,12 @@
 \begin{frame}[fragile]
 \frametitle{Bash is a programming language}
 Let's say you want to print many files at once.
-
-Try this one-liner:
+\newline \newline
+Try this simple example:
 \begin{lstlisting}[language=bash]
 $ for i in {01..05}; do \
-    cat um-logo-$i.txt; \
-done
+    cat um-logo-$i.txt \
+  done
 \end{lstlisting}
 \end{frame}
 
@@ -21,48 +21,57 @@ $ s='s'
 \end{lstlisting}
 Surprisingly these do \textbf{not} work:
 \begin{lstlisting}[language=bash]
-$ i = 0
-$ s = 's'
+$ i = 0   # WRONG
+$ s = 's' # WRONG
 \end{lstlisting}
-Use them with a dollar sign:
+They can be accessed with a dollar sign:
 \begin{lstlisting}[language=bash]
 $ echo $i  # 0
+$ echo $s  # s
 \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Environment variables}
-Let's say you're downloading something from a completely legal website, and you
-want the traffic to go through your local proxy server for completely legal reasons.
-You need to set an \textbf{environment variable}:
+An \textbf{environment variable} can be set and accessed like this:
 \begin{lstlisting}[language=bash]
-# your local proxy
+$ export VAR=VALUE  # set
+$ echo $VAR         # access
+\end{lstlisting}
+\tt{export} exposes the variable to programs that are not part of the shell
+\footnote{aka child processes}, such as Python.
+\begin{block}{Note}
+    If an environment variable works for utility A, it may or may not work
+    for utility B. Refer to documentation when in doubt.
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Environment variables}
+Let's say you're downloading something from a completely legal website,
+and you want the traffic to go through your completely legal local proxy
+for completely legal reasons.
+\begin{lstlisting}[language=bash]
+# set environment variable for local proxy
 $ export HTTPS_PROXY=http://localhost:8080/
 # download the thing
-$ curl https://legal.website/legal-thing/
-\end{lstlisting}
-This does the same thing, but subsequent commands do not have access to it:
-\begin{lstlisting}[language=bash]
-$ HTTPS_PROXY=http://localhost:8080/ \
-    curl https://legal.website/legal-thing/
+$ curl -O https://legal.website/legal-thing
 \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Note about long commands}
-In this section, commands can be rather long. You may type them in a command line,
-or you can edit a shell script (\tt{something.sh}) and run it
-(\tt{bash ./something.sh}).
-\begin{table}
-    \begin{tabular}{m{12em} cc}
-        \hline
-        & Type in CLI & Run a script file \\
-        \hline
-        \verb|\| at the end of line & Necessary & Unnecessary \\
-        \verb|;| between two commands on the same line & Necessary & Necessary \\
-        \hline
-    \end{tabular}
-\end{table}
+\frametitle{Shell scripts}
+Open your favorite text editor and edit \tt{05-scripting/um.sh}:
+\begin{lstlisting}[language=bash]
+# 05-scripting/um.sh
+for i in {01..05}; do
+    cat um-logo-$i.txt
+done
+\end{lstlisting}
+Save file, then come back to bash, \tt{cd} into \tt{05-scripting} and run:
+\begin{lstlisting}[language=bash]
+$ bash um.sh
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}
@@ -70,6 +79,9 @@ or you can edit a shell script (\tt{something.sh}) and run it
 When a program exits, it emits an \textbf{exit status} (also called exit code).
 By convention, an exit status of 0 implies success, and everything else means
 something went wrong (consult respective man pages).
+\newline \newline
+For this very reason, in bash, \textbf{0 is boolean true} and
+\textbf{everything else is false}.
 
 \begin{block}{Note}
     When you \tt{return 0;} at the end of \tt{int main()}, you are
@@ -78,40 +90,248 @@ something went wrong (consult respective man pages).
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{\textbf{if} statements}
+\frametitle{\tt{\&\&} and \tt{||}}
 \begin{lstlisting}[language=bash]
-if COMMAND; then
-    # CODE
-elif COMMAND2; then
-    # CODE2
-else
-    # CODE3
-fi
 \end{lstlisting}
-where \tt{COMMAND} can be
-\begin{itemize}
-    \item A CLI command; \tt{CODE} will run if exit status is zero
-    \item \tt{[[ CONDITION ]]} where you compare strings with \tt{==}
-        or numbers with \tt{-eq}
-\end{itemize}
 \begin{block}{Note}
-    This is way too much to unpack here, but you can check out
-    \url{https://www.gnu.org/software/bash/manual/html_node/Conditional-Constructs.html#index-_005b_005b}
 \end{block}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{\textbf{for} statements}
+\frametitle{\textbf{if} statements}
+Usually, we use an \textbf{if} statement to:
+\begin{itemize}
+    \item Run a command and see if it succeeds
+    \item Test the value of a variable
+    \item Check if a file exists
+\end{itemize}
+It looks like this:
 \begin{lstlisting}[language=bash]
-for VARIABLE in LIST; do
-    # CODE
-    # use VARIABLE with $VARIABLE
+if CONDITION; then
+    BODY
+elif CONDITION; then
+    BODY
+fi
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\textbf{if} statements: exit code of program}
+\begin{lstlisting}[language=bash]
+# if-prog.sh
+if COMMAND; then
+    BODY
+fi
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\textbf{if} statements: compare integers}
+\begin{lstlisting}[language=bash]
+# if-comp.sh
+i=3
+if [ $i -eq 3 ]; then
+    echo "i is 3"
+fi
+\end{lstlisting}
+Other operators:
+\begin{table}
+    \centering
+    \begin{tabular}{ll}
+        \tt{-ge} & $\geq$ \\
+        \tt{-gt} & $>$    \\
+        \tt{-le} & $\leq$ \\
+        \tt{-lt} & $<$    \\
+        \tt{-ne} & $\neq$
+    \end{tabular}
+\end{table}
+\begin{block}{Note}
+    Spaces after \tt{[} and before \tt{]} are \textbf{required}.
+    \footnote{
+        Trivia: In bash the \tt{[ ]} is built-in, but in some shells
+        it's an executable called \tt{/usr/bin/[}.
+        See \url{https://serverfault.com/questions/138951/what-is-usr-bin}
+    }
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\textbf{if} statements: arithmetic}
+\begin{lstlisting}[language=bash]
+# if-arith.sh
+i=3
+if (( $i % 2 == 1 )); then
+    echo "i is odd"
+fi
+\end{lstlisting}
+\begin{block}{Note}
+    We do not use \verb|-eq|, \verb|-gt| etc.~inside \verb|(( ))|.
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\textbf{if} statements: test string variable}
+\begin{lstlisting}[language=bash]
+# if-str.sh
+str="something"
+if [ -z $str ]; then
+    echo "str is empty"
+elif [ $str = "something" ]; then
+    # note we don't use ==
+    echo "str is 'something'"
+fi
+\end{lstlisting}
+Complementary operators to \tt{-z} and \tt{=}:
+\begin{table}
+    \centering
+    \begin{tabular}{ll}
+        \tt{-n} & not empty \\
+        \tt{!=} & not equal to
+    \end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\textbf{if} statements: file exists}
+\begin{lstlisting}[language=bash]
+# if-file.sh
+file="something.txt"
+if [ -e $file ]; then
+    echo "$file exists"
+fi
+\end{lstlisting}
+Common counterparts to \tt{-e}:
+\begin{table}
+    \centering
+    \begin{tabular}{ll}
+        \tt{-f} & exists and is regular file \\
+        \tt{-d} & exists and is directory
+    \end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\textbf{for} statements}
+The \tt{for} statement is usually used to:
+\begin{itemize}
+    \item Iterate over a range
+    \item Iterate over a list of strings
+\end{itemize}
+It looks like:
+\begin{lstlisting}[language=bash]
+for VAR in LIST; do
+    BODY
 done
 \end{lstlisting}
-where \tt{LIST} is commonly a range, e.g. \verb|{01..10}|, or the output of
-another command, e.g. \verb|$(ls)|.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\textbf{for} statements: range}
+\begin{lstlisting}[language=bash]
+# for-timer.sh
+for t in {10..1}; do
+    echo "$t seconds left"
+    sleep 1
+done
+\end{lstlisting}
 \begin{block}{Note}
-    In bash, a string can be split into a list with respect to whitespace.
-    Therefore, \verb|$(ls)| only works as expected if no path contains whitespace.
+    In \textbf{double quotes}, variables will be expanded.
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\textbf{for} statements: list of strings}
+A string is split into a list with respect to whitespace.
+\newline \newline
+Let's say you want to create a backup of every file inside current directory:
+\begin{lstlisting}[language=bash]
+# for-backup.sh
+for file in $(ls); do
+    cp $file $file.backup
+done
+\end{lstlisting}
+\begin{block}{Explanation}
+    \verb|$()| executes a command and takes its output.
+    It is called ``command substitution''.
+\end{block}
+\begin{block}{Observation}
+    Why does bash think ``My Documents'' are two files?
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\textbf{for} statements: IFS}
+Bash splits strings on spaces, tabs, and newlines.
+This is why \tt{My Documents} was split into \tt{My} and \tt{Documents}.
+\newline \newline
+Adjust the \textbf{IFS} environment variable to delimit on \verb|\n| only:
+\begin{lstlisting}[language=bash]
+# for-backup.sh
+IFS=$'\n'
+for file in $(ls); do
+    cp $file $file.backup
+done
+\end{lstlisting}
+\begin{block}{Explanation}
+    \verb|$''| is called ``ANSI-C quoting''. It is not used very often.
+    \footnote{
+        More on this:
+        \url{https://www.gnu.org/software/bash/manual/html_node/ANSI_002dC-Quoting.html}
+    }
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\textbf{for} statements: accumulator}
+Let's try keeping count with an integer variable.
+\begin{lstlisting}[language=bash]
+# for-backup.sh
+IFS=$'\n'
+count=0
+for file in $(ls); do
+    cp $file $file.backup
+    count=$(( count + 1 ))
+done
+echo "$count files backed up"
+\end{lstlisting}
+\begin{block}{Explanation}
+    \verb|$(())| is called ``arithmetic expansion''.
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Your turn}
+Print the odd numbered lines of \tt{05-scripting/logos.txt}.
+\pause
+\begin{lstlisting}[language=bash]
+# logos.sh
+IFS=$'\n'
+count=0
+for line in $(cat logos.txt); do
+	count=$(( count + 1 ))
+	if (( count % 2 == 1 )); then
+		echo $line
+	fi
+done
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The Ultimate Challenge}
+Each line in \tt{05-scripting/obf.txt} begins with an 8-digit number.
+Print every line with its number greater than any of the lines above.
+\pause
+\begin{block}{Solution}
+\begin{lstlisting}[language=bash]
+IFS=$'\n'
+max=0
+for line in $(cat obf.txt); do
+	year=$(echo $line | grep -oE '^[0-9]{8}')
+	if [ $year -gt $max ]; then
+		echo $line
+		max=$year
+	fi
+done
+\end{lstlisting}
 \end{block}
 \end{frame}

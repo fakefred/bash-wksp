@@ -69,12 +69,45 @@
     \verb|A?|           & 0 or 1 A                                  \\
     \verb|A+|           & $\ge 1$ A's                               \\
     \verb|A*|           & $\ge 0$ A's                               \\
+    \verb|A{,6}|        & 6 A's                                     \\
     \verb|A{,6}|        & 0--6 A's                                  \\
     \verb|A{4,6}|       & 4--6 A's                                  \\
     \verb!(ls|cd|rm)!   & one of ls, cd, and rm                     \\
     \verb|\w|           & Letters, digits, \_                       \\
-    \verb|\W|           & Anything but \verb|\w|                    \\
+    \verb|\W|           & Not \verb|\w|                             \\
     \verb|\s|           & Whitespace                                \\
-    \verb|\b|           & Boundary of word
+    \verb|\S|           & Not \verb|\s|                             \\
+    \verb|\b|           & Boundary of word                          \\
+    \verb|\B|           & Not \verb|\b|
+\end{tabular}
+
+\section{Scripting}
+\tt{if [ TEST ]; then BODY; fi}
+\vspace{0.3cm}
+
+\begin{tabular}{ll}
+    \verb|$a -eq $b|    & $a = b$                                   \\
+    \verb|$a -ge $b|    & $a \geq b$                                \\
+    \verb|$a -gt $b|    & $a > b$                                   \\
+    \verb|$a -le $b|    & $a \leq b$                                \\
+    \verb|$a -lt $b|    & $a < b$                                   \\
+    \verb|$a -ne $b|    & $a \neq b$                                \\
+    \verb|-z $a|        & empty string                              \\
+    \verb|-n $a|        & not empty string                          \\
+    \verb|$a = $b|      & strings are the same                      \\
+    \verb|$a != $b|     & strings are different
+\end{tabular}
+
+\vspace{0.5cm}
+\tt{if (( TEST )); then BODY; fi}
+\vspace{0.3cm}
+
+\begin{tabular}{ll}
+    \verb|%|            & modulo                                    \\
+    \verb|**|           & exponentiation                            \\
+    \verb|== !=|        & $= \neq$                                  \\
+    \verb|< > <= >=|    & $< > \leq \geq$                           \\
+    \verb!&& ||!        & logical AND/OR
 \end{tabular}
 \end{document}
+
