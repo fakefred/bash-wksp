@@ -90,14 +90,6 @@ For this very reason, in bash, \textbf{0 is boolean true} and
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{\tt{\&\&} and \tt{||}}
-\begin{lstlisting}[language=bash]
-\end{lstlisting}
-\begin{block}{Note}
-\end{block}
-\end{frame}
-
-\begin{frame}[fragile]
 \frametitle{\textbf{if} statements}
 Usually, we use an \textbf{if} statement to:
 \begin{itemize}
@@ -177,7 +169,7 @@ str="something"
 if [ -z $str ]; then
     echo "str is empty"
 elif [ $str = "something" ]; then
-    # note we don't use ==
+    # = and == are both ok
     echo "str is 'something'"
 fi
 \end{lstlisting}
