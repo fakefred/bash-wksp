@@ -10,7 +10,7 @@ To compile, run `make`.
 
 ## Topics
 
-Part 1 (WIP):
+Part 1:
 
 - Intro
     * Brief history
@@ -18,6 +18,7 @@ Part 1 (WIP):
 - Files & File Tree
     * `cat, cp, mv, rm`
     * `cd, pwd, ls, mkdir`
+    * Paths, `.`, `..`, `*`
 - CLI
     * Options and arguments
     * Reading man pages
@@ -25,15 +26,16 @@ Part 1 (WIP):
 - Pipes
     * stdin, stdout
     * `>` and `>>`
+    * Pipes
     * `grep`
 
-Part 2 (heavily WIP):
+Part 2:
 
 - Regex
     * Patterns
     * `grep -E`
     * `sed`
-    * Capture groups
+    * Capturing groups
 - Scripting
     * Variables
     * `if`
@@ -45,8 +47,17 @@ Before the workshop takes place, the directory `tarball/` is to be
 distributed to every participant. It is intended to be in-workshop
 exercise material.
 
+## Cheatsheet
+
+We will print the cheatsheet (source: `cheatsheet.tex`) in bulk and hand
+out one copy per participant.
+
 ## TODO
 
+- [ ] Proofread slides
+- [ ] Proofread cheatsheet
+- [ ] Test in-slide scripts against tarball
+- [ ] Distribute tarball
 - [ ] Find a good bash environment on Windows
 - [ ] Write a WeChat promotional article
 
