@@ -12,7 +12,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Anatomy of a command (part 1)}
+\frametitle{Anatomy of a command}
 \begin{lstlisting}[language=bash]
 # get first 5 lines of file
 $ head -n 5 longfile.txt
@@ -26,7 +26,7 @@ $ head -n 5 longfile.txt
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Anatomy of a command (part 2)}
+\frametitle{Anatomy of a command}
 Anatomy of a command:
 \begin{lstlisting}[language=bash]
 # list all files but *.o recursively in reverse
@@ -51,7 +51,7 @@ $ ls -Rr --ignore='*.o'
 \begin{frame}[fragile]
 \frametitle{I can't possibly remember all \tt{--this} and \tt{--that}!}
 You don't need to, thanks to \textbf{man pages}! (Short for manual pages)
-
+\newline \newline
 Try:
 \begin{lstlisting}[language=bash]
 $ man ls
@@ -73,6 +73,13 @@ MANIFESTO OF THE COMMUNIST PARTY.
 
 ==> p1.txt <==
 I. BOURGEOIS AND PROLETARIANS.
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}<presentation:0>[fragile]
+\frametitle{Solution}
+\begin{lstlisting}[language=bash]
+$ head -n1 -v p0.txt p1.txt
 \end{lstlisting}
 \end{frame}
 
@@ -102,4 +109,3 @@ $ comm -12 sway.1.conf sway.2.conf
     \item \tt{Ctrl-R}: search history
 \end{itemize}
 \end{frame}
-

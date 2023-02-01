@@ -13,17 +13,15 @@ Each of these is a different \textbf{file}:
 
 \begin{block}{Note}
     The dot and suffix are part of the filename.
-\end{block}
-
-\begin{block}{Tip}
-    For convenience, \textbf{avoid spaces} and most of the special characters
-    (except \verb|._-|) when working in bash. If you have to, surround filename
-    in quotes: \tt{`Lab Report (3) final FINAL-1.docx'}
+    \newline \newline
+    \textbf{Avoid spaces and special characters} (except \verb|._-|).
+    If you have to, surround filename in quotes:
+    \tt{`Lab Report (3) final FINAL-1.docx'}
 \end{block}
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{\tt{cat}: Printing a file}
+\frametitle{\tt{cat}: Printing a file}
 Try this inside \tt{01-files/}:
 \begin{lstlisting}[language=bash]
 $ cat a
@@ -40,15 +38,20 @@ $ cat a.txt
 \frametitle{\tt{cp, mv, rm}: Relocating a file}
 Try this inside \tt{01-files/}:
 \begin{lstlisting}[language=bash]
+$ ls
 $ cp a b
+$ ls
 $ mv a.txt b.txt
+$ ls
 $ rm b
+$ ls
 \end{lstlisting}
 \begin{block}{Explanation}
     \begin{itemize}
-        \item ``copy'' \tt{a} into a file called \tt{b}
-        \item ``move'' \tt{a.txt} into a file called \tt{b.txt}
-        \item ``remove'' \tt{b}
+        \item \tt{ls} lists files
+        \item \textbf{copy} \tt{a} into a file called \tt{b}
+        \item \textbf{move} \tt{a.txt} into a file called \tt{b.txt}
+        \item \textbf{remove} \tt{b}
     \end{itemize}
 \end{block}
 \end{frame}
@@ -60,14 +63,13 @@ that file. \textbf{Otherwise, it is destroyed and overwritten.}
 \newline \newline
 Try this inside \tt{01-files/}:
 \begin{lstlisting}[language=bash]
-$ cp a b      # b is created
-$ cp a a.txt  # a.txt is overwritten
+$ cp a b      # creates b
+$ cp a a.txt  # overwrites a.txt
 \end{lstlisting}
 
-When you \tt{mv} a file into a file that doesn't exist, you are essentially
-\textbf{renaming} it. Recall this command from last slide:
+Renaming a file in bash works like so:
 \begin{lstlisting}[language=bash]
-$ mv a.txt b.txt
+$ mv b newb
 \end{lstlisting}
 \end{frame}
 
@@ -75,15 +77,14 @@ $ mv a.txt b.txt
 \frametitle{Directories}
 Each of these is a \textbf{directory} (``dir'' for short):
 \begin{itemize}
-    \item \tt{dir/}
     \item \tt{01-files/}
-    \item \tt{01-files/dir/}
-    \item \tt{01-files/.dir/} (Hidden dir)
+    \item \tt{01-files/c/}
+    \item \tt{01-files/.c/} (Hidden dir)
 \end{itemize}
 
 \begin{block}{Convention}
     For clarity, we add a slash (\tt{/}) to the end of a directory in the
-    slides.    However, in reality it often makes no difference.
+    slides. However, in reality it often makes no difference.
 \end{block}
 \end{frame}
 
@@ -91,16 +92,16 @@ Each of these is a \textbf{directory} (``dir'' for short):
 \frametitle{\tt{cd, pwd}: Changing directory}
 Try this inside \tt{01-files/}:
 \begin{lstlisting}[language=bash]
-$ cd dir/
+$ cd c/
 $ pwd
 $ cd ../
 $ pwd
 \end{lstlisting}
 \begin{block}{Explanation}
     \begin{itemize}
-        \item \tt{cd} is short for ``change directory''
-        \item \tt{pwd} is short for ``print working directory''
-        \item \tt{..} is a special directory. It is the ``parent''
+        \item \tt{cd}: ``change directory''
+        \item \tt{pwd}: ``print working directory''
+        \item \tt{../} means ``parent directory''
     \end{itemize}
 \end{block}
 \end{frame}
@@ -112,14 +113,15 @@ Try this inside \tt{01-files/}:
 $ ls
 $ ls -a
 $ ls -l
-$ ls -a -l
-$ ls dir/
+$ ls -la
+$ ls c/
 \end{lstlisting}
 \begin{block}{Explanation}
     \begin{itemize}
-        \item \tt{ls} is short for ``list''
+        \item \tt{ls}: ``list''
         \item \tt{-a} is short for \tt{--all}
         \item \tt{-l} enables long listing format
+        \item \tt{-la} = \tt{-l} + \tt{-a}
     \end{itemize}
 \end{block}
 \end{frame}
@@ -135,7 +137,7 @@ $ ls dir/
 \end{lstlisting}
 \begin{block}{Explanation}
     \begin{itemize}
-        \item \tt{mkdir} stands for ``make directory''
+        \item \tt{mkdir}: ``make directory''
         \item \tt{-r} is short for \tt{--recursive}
         \item \tt{-p} is short for \tt{--parents}
     \end{itemize}
@@ -148,15 +150,13 @@ Try this inside \tt{01-files/}:
 \begin{lstlisting}[language=bash]
 $ cp a dir/
 $ mv b.txt dir/
-$ mv b.txt dir/a
 $ mv dir/a b.txt
 \end{lstlisting}
 \begin{block}{Explanation}
     \begin{itemize}
-        \item Line 1 copies \tt{a} into \tt{dir/}
-        \item Line 2 moves \tt{b.txt} into \tt{dir/}
-        \item Line 3 moves \tt{b.txt} into \tt{dir/} and overwrite \tt{dir/a}
-        \item Line 4 moves \tt{dir/a} back into \tt{b.txt}
+        \item Copy \tt{a} into \tt{dir/}
+        \item Move \tt{b.txt} into \tt{dir/}
+        \item Move \tt{dir/a} back into \tt{b.txt}
     \end{itemize}
 \end{block}
 \end{frame}
@@ -240,8 +240,8 @@ us will ever use.}
 \frametitle{\tt{.} and \tt{..}}
 Inside every dir\footnote{Except \tt{/}} there are two special dirs:
 \begin{itemize}
-    \item \tt{.} — current dir
-    \item \tt{..} — parent dir
+    \item \tt{./} — current dir
+    \item \tt{../} — parent dir
 \end{itemize}
 
 You can use them in relative paths.
@@ -254,14 +254,14 @@ You can use them in relative paths.
 \end{frame}
 
 \begin{frame}
-\frametitle{Task}
+\frametitle{Challenge}
 Inside \tt{01-files/}:
 \begin{itemize}
-    \item Enter \tt{task/}
+    \item Enter \tt{challenge/}
     \item Create \tt{backup/}
     \item Copy \tt{a.txt} into \tt{dir/}
     \item Move \tt{dir/} into \tt{backup/}
-    \item Verify if you succeeded using \tt{ls}
+    \item Verify using \tt{ls}
     \item Delete \tt{backup/}
 \end{itemize}
 \end{frame}
@@ -269,6 +269,7 @@ Inside \tt{01-files/}:
 \begin{frame}<presentation:0>[fragile]
 \frametitle{Solution}
 \begin{lstlisting}[language=bash]
+$ cd challenge/
 $ mkdir backup/
 $ cp a.txt dir/
 $ mv dir/ backup/

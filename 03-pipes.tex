@@ -2,14 +2,13 @@
 \section{III. Pipes}
 \begin{frame}
 \frametitle{stdout}
-When you run a command, what is the ``output'' you're looking at, exactly?
-Or, where does a program \tt{printf} to?
+When you \tt{printf}, where does the string go?
 \newline \newline
 Your screen? Yes but also no.
 \newline \newline
-\tt{stdout}, or standard output, is a special file where \tt{printf}
-prints to.\footnote{Yes, there's \tt{stderr} too, but we won't be talking
-about it}
+\tt{stdout}, or \textbf{standard output}, is a special file where \tt{printf}
+dumps its output.\footnote{Yes, there's \tt{stderr} too, but we won't be talking
+about it.}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -18,8 +17,8 @@ You can capture the stdout of a command and direct it somewhere else than your
 screen, such as a file.
 Try this:
 \begin{lstlisting}[language=bash]
-$ echo hello # print to terminal
-$ echo hello > out # write to file
+$ echo hello        # print to terminal
+$ echo hello > out  # write to file
 \end{lstlisting}
 \begin{figure}
     \centering
@@ -123,6 +122,7 @@ $ cat numbers | sort | uniq | wc
 \end{figure}
 \begin{block}{Challenge}
     Can you think of a way to eliminate a pipe? (Hint: man sort)
+    % sort numbers | uniq | wc
 \end{block}
 \end{frame}
 
