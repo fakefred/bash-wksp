@@ -64,3 +64,29 @@ out one copy per participant.
 ## License
 
 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+
+## References
+
+- [Bash Manual](https://www.gnu.org/software/bash/manual/html_node/)
+
+- "Wildcard":
+    * [Filename Expansion](https://www.gnu.org/software/bash/manual/html_node/Filename-Expansion.html)
+- `>` and `>>`:
+    * [Redirections](https://www.gnu.org/software/bash/manual/html_node/Redirections.html)
+- [Exit status](https://www.gnu.org/software/bash/manual/html_node/Exit-Status.html)
+- `if` statements and `[[ ]]`:
+    * [Conditional Constructs](https://www.gnu.org/software/bash/manual/html_node/Conditional-Constructs.html)
+    * [Conditional Expressions](https://www.gnu.org/software/bash/manual/html_node/Bash-Conditional-Expressions.html)
+- `$(( ))` and `(( ))`:
+    * [Shell Arithmetic](https://www.gnu.org/software/bash/manual/html_node/Shell-Arithmetic.html)
+    * [Arithmetic Expansion](https://www.gnu.org/software/bash/manual/html_node/Arithmetic-Expansion.html)
+- `for` statements and `{1..10}`:
+    * [Looping Constructs](https://www.gnu.org/software/bash/manual/html_node/Looping-Constructs.html)
+    * [Brace Expansion](https://www.gnu.org/software/bash/manual/html_node/Brace-Expansion.html)
+- `$()`:
+    * [Command Substitution](https://www.gnu.org/software/bash/manual/html_node/Command-Substitution.html)
+- Quoting:
+    * [Double Quotes](https://www.gnu.org/software/bash/manual/html_node/Double-Quotes.html)
+    * [ANSI-C Quoting](https://www.gnu.org/software/bash/manual/html_node/ANSI_002dC-Quoting.html)
+- `IFS`:
+    * [Word Splitting](https://www.gnu.org/software/bash/manual/html_node/Word-Splitting.html)
