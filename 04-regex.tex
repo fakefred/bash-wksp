@@ -49,7 +49,7 @@ The dot is the simplest pattern:
 \begin{table}
     \centering
     \begin{tabular}{ll}
-        Pattern             & Matches \\
+        \textbf{Pattern}    & \textbf{Matches} \\
         \verb|.|            & any character \\
     \end{tabular}
 \end{table}
@@ -59,27 +59,25 @@ The dot is the simplest pattern:
 \end{example}
 
 \begin{block}{Note}
-    \verb|\.| matches a literal dot.
-
-    Same goes for \verb|\(| \verb|\[| etc.
+    \verb|\.| matches a literal dot. Same goes for \verb|\(| \verb|\[| etc.
 \end{block}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Regex patterns: \tt{[]}}
-Brackets match one character inside, but \verb|^| and \verb|-| are special:
+Brackets match any of the characters inside, but \verb|^| and \verb|-| are special:
 \begin{table}
     \centering
     \begin{tabular}{ll}
         \verb|[aeiou]|      & any vowel \\
         \verb|[^aeiou]|     & anything but a vowel \\
         \verb|[0-9]|        & any digit \\
-        \verb|[A-Za-z]|     & any letter \\
+        \verb|[^A-Za-z]|    & anything but letters \\
     \end{tabular}
 \end{table}
 
 \begin{example}
-    \verb|[A-C][01][0-9]| matches \tt{A00} up to \tt{C99}.
+    \verb|[A-C][01][0-9]| matches \tt{A00} up to \tt{C19}.
 \end{example}
 \end{frame}
 
@@ -95,12 +93,8 @@ Brackets match one character inside, but \verb|^| and \verb|-| are special:
     \end{tabular}
 \end{table}
 
-\begin{example}
-    \verb|\w+\s\w+| matches \tt{two words} and \tt{words with\_underscores}.
-\end{example}
-
 \begin{block}{Note}
-    Things like \verb|[\w\s]| won't work.
+    Character classes in brackets like \verb|[\w\s]| won't work.
 \end{block}
 \end{frame}
 
@@ -181,8 +175,8 @@ What strings does this regex match? \newline
 \frametitle{Quiz: Does it match?}
 What matches \tt{+86 021} but not \tt{+86021}?
 \begin{itemize}
-    \item \verb|\+86\s+[0-9]{3}-[0-9]{8}| % this one
-    \item \verb|\+86\s*[0-9]{3}-[0-9]{8}|
+    \item \verb|\+86\s+[0-9]{3}| % this one
+    \item \verb|\+86\s*[0-9]{3}|
 \end{itemize}
 
 What does \Large \verb|[um]jicanvas.com| \normalsize match?
@@ -192,7 +186,7 @@ What does \Large \verb|[um]jicanvas.com| \normalsize match?
 \end{itemize}
 
 \begin{block}{Challenge}
-    How to fix this regex? \pause \verb|(um)?jicanvas\.com|
+    How to fix this regex? % (um)?jicanvas\.com
 \end{block}
 \end{frame}
 
@@ -206,7 +200,7 @@ $ grep -E '.+\..+@sjtu.edu.cn' faculty
 \begin{block}{Observation}
     The regex matches all email addresses in the file \tt{faculty}
     that look like ``firstname.lastname@sjtu.edu.cn''.
-
+    \newline \newline
     \tt{-E} stands for Extended regex.
 \end{block}
 \end{frame}
