@@ -311,27 +311,20 @@ $ grep -E 'VV[1-2]' courses | \
 \end{frame}
 
 \begin{frame}
-\frametitle{When (and when not) to use regex?}
-\begin{figure}[h]
-    \centering
-    \begin{tikzpicture}
-        \node (can-low)     at ( 0,  1)   {};
-        \node (can-high)    at ( 7,  1)   {};
-        \node (have-low)    at ( 0,  2)   {};
-        \node (have-high)   at (10,  2)   {};
-        \node (should-low)  at ( 1, -0.2) {};
-        \node (should-high) at ( 5, -0.2) {};
-        \draw[left color=green, right color=red] (0, 0) rectangle (10, 0.8);
-        \draw[line width=1pt] (0, 0) rectangle (7, 0.8);
-        \draw[line width=3pt] (1, 0) rectangle (5, 0.8);
-        \draw[decorate, decoration=brace] (can-low) -- (can-high)
-            node[text centered, midway, above] {Problems regex can solve};
-        \draw[decorate, decoration=brace] (have-low) -- (have-high)
-            node[text centered, midway, above] {Problems people have tried to solve with regex};
-        \draw[decorate, decoration={brace, mirror}] (should-low) -- (should-high)
-            node[text centered, midway, below] {Problems regex is actually good for};
-    \end{tikzpicture}
-\end{figure}
-Regex is \textbf{not} the solution to everything. Stop before it is too late.
+\frametitle{When not to use regex?}
+\begin{columns}
+    \begin{column}{0.7\textwidth}
+        \includegraphics[width=\textwidth]{regex_explained}
+    \end{column}
+    \begin{column}{0.3\textwidth}
+        If your regex:
+        \begin{itemize}
+            \item is 50 characters long
+            \item handles lots of Unicode
+            \item has too many backslashes
+        \end{itemize}
+        consider something else.
+    \end{column}
+\end{columns}
 \end{frame}
 
