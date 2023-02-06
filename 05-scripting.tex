@@ -108,11 +108,12 @@ fi
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{\textbf{if} statements: exit code of program}
+\frametitle{\textbf{if} statements: exit code}
 \begin{lstlisting}[language=bash]
 # if-prog.sh
-if COMMAND; then
-    BODY
+if mkdir temp; then
+    # write to file only if mkdir emits exit code 0
+    echo "temporary dir created" >> temp/log
 fi
 \end{lstlisting}
 \end{frame}
