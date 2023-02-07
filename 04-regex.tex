@@ -235,12 +235,12 @@ Extract all course codes from \tt{04-regex/courses}. \newline
         VP140 Physics I & & VP140
     \end{tabular}
 \end{example}
-\pause
-\begin{block}{Solution (naïve version)}
-\begin{lstlisting}[language=bash]
-$ grep -oE 'V[A-Z][0-9]+' courses
-\end{lstlisting}
-\end{block}
+% \pause
+% \begin{block}{Solution (naïve version)}
+% \begin{lstlisting}[language=bash]
+% $ grep -oE 'V[A-Z][0-9]+' courses
+% \end{lstlisting}
+% \end{block}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -301,13 +301,13 @@ Do not print other courses.
         VV417 & & \textit{not printed}
     \end{tabular}
 \end{example}
-\pause
-\begin{block}{Solution}
-\begin{lstlisting}[language=bash]
-$ grep -E 'VV[1-2]' courses | \
-    sed -E 's/VV([0-9]{3})/MATH\10J/'
-\end{lstlisting}
-\end{block}
+% \pause
+% \begin{block}{Solution}
+% \begin{lstlisting}[language=bash]
+% $ grep -E 'VV[1-2]' courses | \
+    % sed -E 's/VV([0-9]{3})/MATH\10J/'
+% \end{lstlisting}
+% \end{block}
 \end{frame}
 
 \begin{frame}

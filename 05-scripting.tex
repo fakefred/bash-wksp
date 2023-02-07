@@ -295,38 +295,38 @@ echo "$count files backed up"
 \begin{frame}[fragile]
 \frametitle{Your turn}
 Print the odd numbered lines of \tt{05-scripting/logos.txt}.
-\pause
-\begin{lstlisting}[language=bash]
-# logos.sh
-IFS=$'\n'
-count=0
-for line in $(cat logos.txt); do
-	count=$(( count + 1 ))
-	if (( count % 2 == 1 )); then
-		echo $line
-	fi
-done
-\end{lstlisting}
+% \pause
+% \begin{lstlisting}[language=bash]
+% # logos.sh
+% IFS=$'\n'
+% count=0
+% for line in $(cat logos.txt); do
+    % count=$(( count + 1 ))
+    % if (( count % 2 == 1 )); then
+        % echo $line
+    % fi
+% done
+% \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{The Ultimate Challenge}
 Each line in \tt{05-scripting/obf.txt} begins with an 8-digit number.
 Print every line with its number greater than any of the lines above.
-\pause
-\begin{block}{Solution}
-\begin{lstlisting}[language=bash]
-IFS=$'\n'
-max=0
-for line in $(cat obf.txt); do
-	year=$(echo $line | grep -oE '^[0-9]{8}')
-    if [[ $year -gt $max ]]; then
-		echo $line
-		max=$year
-	fi
-done
-\end{lstlisting}
-\end{block}
+% \pause
+% \begin{block}{Solution}
+% \begin{lstlisting}[language=bash]
+% IFS=$'\n'
+% max=0
+% for line in $(cat obf.txt); do
+    % year=$(echo $line | grep -oE '^[0-9]{8}')
+    % if [[ $year -gt $max ]]; then
+        % echo $line
+        % max=$year
+    % fi
+% done
+% \end{lstlisting}
+% \end{block}
 \end{frame}
 
 \begin{frame}
