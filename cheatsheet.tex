@@ -11,50 +11,51 @@
 \maketitle
 \section{Files \& Directories}
 \begin{tabular}{ll}
-    \tt{cat a}              & Print a                               \\
-    \tt{cd dir/}            & Go to dir/                            \\
-    \tt{cd ..}              & Go to parent dir                      \\
-    \tt{pwd}                & Print current dir                     \\
-    \tt{cp a b}             & Copy a to b                           \\
-    \tt{cp a dir/}          & Copy a into dir/                      \\
-    \tt{cp -r sub/ dir/}    & Copy sub/ into dir/                   \\
-    \tt{mv a b}             & Rename a to b                         \\
-    \tt{mv a dir/}          & Move a into dir/                      \\
-    \tt{mv sub/ dir/}       & Move sub/ into dir/                   \\
-    \tt{rm a}               & Remove a                              \\
-    \tt{rm -r dir/}         & Remove dir/                           \\
-    \tt{ls}                 & List files                            \\
-    \tt{ls -a}              & List files, incl. hidden              \\
-    \tt{ls -l}              & List files, show details              \\
-    \tt{ls dir/}            & List files under dir/                 \\
-    \tt{mkdir dir/}         & Create dir/                           \\
-    \tt{mkdir -p dir/sub/}  & Create dir/sub/ directly
+    \tt{cat a}              & print a                               \\
+    \tt{cd dir/}            & go to dir/                            \\
+    \tt{cd ..}              & go to parent dir                      \\
+    \tt{pwd}                & print current dir                     \\
+    \tt{cp a b}             & copy a to b                           \\
+    \tt{cp a dir/}          & copy a into dir/                      \\
+    \tt{cp -r sub/ dir/}    & copy sub/ into dir/                   \\
+    \tt{mv a b}             & rename a to b                         \\
+    \tt{mv a dir/}          & move a into dir/                      \\
+    \tt{mv sub/ dir/}       & move sub/ into dir/                   \\
+    \tt{rm a}               & remove a                              \\
+    \tt{rm -r dir/}         & remove dir/                           \\
+    \tt{ls}                 & list files                            \\
+    \tt{ls -a}              & list files, incl. hidden              \\
+    \tt{ls -l}              & list files, show details              \\
+    \tt{ls dir/}            & list files under dir/                 \\
+    \tt{mkdir dir/}         & create dir/                           \\
+    \tt{mkdir -p dir/sub/}  & create dir/sub/ directly
 \end{tabular}
 
 \section{Utilities}
 \begin{tabular}{ll}
-    \tt{head -n 5 a}        & Print first 5 lines of a              \\
+    \tt{head -n 5 a}        & print first 5 lines of a              \\
     \tt{grep pattern files} & grep for pattern in files             \\
-    \tt{grep -i}            & Ignore case                           \\
-    \tt{grep -v}            & Invert match                          \\
-    \tt{grep -o}            & Only show matched part                \\
-    \tt{grep -E}            & Extended regex                        \\
-    \tt{sort file}          & Sort lines in file                    \\
-    \tt{sort -f}            & Ignore case                           \\
-    \tt{sort -n}            & Numerical order                       \\
-    \tt{sort -r}            & Reverse                               \\
-    \tt{comm -12 a b}       & Print lines in both a and b           \\
-    \tt{diff a b}           & Difference between a and b
+    \tt{grep -i}            & ignore case                           \\
+    \tt{grep -v}            & invert match                          \\
+    \tt{grep -o}            & only show matched part                \\
+    \tt{grep -E}            & extended regex                        \\
+    \tt{sort file}          & sort lines in file                    \\
+    \tt{sort -f}            & ignore case                           \\
+    \tt{sort -n}            & numerical order                       \\
+    \tt{sort -r}            & reverse                               \\
+    \tt{uniq}               & remove duplicate lines                \\
+    \tt{comm -12 a b}       & print lines in both a and b           \\
+    \tt{diff a b}           & difference between a and b
 \end{tabular}
 
 \section{Ctrl+}
 \begin{tabular}{ll}
-    \tt{W} & Delete one word to the left                           \\
-    \tt{U} & Delete everything to the left                         \\
-    \tt{K} & Delete everything to the right                        \\
-    \tt{7} & Undo                                                  \\
-    \tt{C} & Abort                                                 \\
-    \tt{R} & Search history
+    \tt{W} & delete one word to the left                           \\
+    \tt{U} & delete everything to the left                         \\
+    \tt{K} & delete everything to the right                        \\
+    \tt{7} & undo                                                  \\
+    \tt{C} & abort                                                 \\
+    \tt{R} & search history
 \end{tabular}
 
 \section{Regex (ERE)}
@@ -74,25 +75,24 @@
     \verb|A{,6}|        & 0--6 A's                                  \\
     \verb|A{4,6}|       & 4--6 A's                                  \\
     \verb!(ls|cd|rm)!   & one of ls, cd, and rm                     \\
-    \verb|\w|           & Letters, digits, \_                       \\
-    \verb|\W|           & Not \verb|\w|                             \\
-    \verb|\s|           & Whitespace                                \\
-    \verb|\S|           & Not \verb|\s|                             \\
-    \verb|\b|           & Boundary of word                          \\
-    \verb|\B|           & Not \verb|\b|
+    \verb|\w|           & letters, digits, \_                       \\
+    \verb|\s|           & whitespace                                \\
+    \verb|\b|           & boundary of word                          \\
+    \verb|\W \S \B|     & invert \verb|\w \s \b|
 \end{tabular}
+
 
 \section{Scripting}
 \tt{if [[ TEST ]]; then BODY; fi}
 \vspace{0.3cm}
 
+\begin{tabular}{cccccc}
+    \verb|-eq| & \verb|-ne| & \verb|-le| & \verb|-lt| & \verb|-ge| & \verb|-gt| \\
+    $=$        & $\neq$     & $\leq$     & $<$        & $\geq$     & $>$
+\end{tabular}
+\vspace{0.3cm}
+
 \begin{tabular}{ll}
-    \verb|$a -eq $b|    & $a = b$                                   \\
-    \verb|$a -ge $b|    & $a \geq b$                                \\
-    \verb|$a -gt $b|    & $a > b$                                   \\
-    \verb|$a -le $b|    & $a \leq b$                                \\
-    \verb|$a -lt $b|    & $a < b$                                   \\
-    \verb|$a -ne $b|    & $a \neq b$                                \\
     \verb|-z $a|        & empty string                              \\
     \verb|-n $a|        & not empty string                          \\
     \verb|$a = $b|      & strings are the same                      \\
@@ -101,8 +101,8 @@
     \verb|-f $file|     & is regular file                           \\
     \verb|-d $dir|      & is directory
 \end{tabular}
-
 \vspace{0.5cm}
+
 \tt{if (( TEST )); then BODY; fi}
 \vspace{0.3cm}
 
@@ -113,5 +113,17 @@
     \verb|< > <= >=|    & $< > \leq \geq$                           \\
     \verb!&& ||!        & logical AND/OR
 \end{tabular}
-\end{document}
+\vspace{0.5cm}
 
+\tt{for VAR in LIST; do BODY; done}
+\vspace{0.3cm}
+
+\begin{tabular}{ll}
+    \verb|{01..10}|     & 01, 02, …, 10                             \\
+    \verb|{2..10..2}|   & 2, 4, …, 10                               \\
+    \verb|$()|          & output of command
+\end{tabular}
+\vspace{0.3cm}
+
+If necessary, \verb|IFS=$'\n'|
+\end{document}
