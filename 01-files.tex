@@ -22,7 +22,7 @@ Each of these is a different \textbf{file}:
 
 \begin{frame}[fragile]
 \frametitle{\tt{cat}: Printing a file}
-Try this inside \tt{01-files/}:
+Open a bash terminal inside \tt{01-files/}, then:
 \begin{lstlisting}[language=bash]
 $ cat a
 $ cat .a
@@ -64,7 +64,9 @@ that file. \textbf{Otherwise, it is destroyed and overwritten.}
 Try this inside \tt{01-files/}:
 \begin{lstlisting}[language=bash]
 $ cp a b      # creates b
+$ cat a
 $ cp a a.txt  # overwrites a.txt
+$ cat a.txt
 \end{lstlisting}
 
 Renaming a file in bash works like so:
@@ -263,6 +265,7 @@ Inside \tt{01-files/}:
     \item Move \tt{dir/} into \tt{backup/}
     \item Verify using \tt{ls}
     \item Delete \tt{backup/}
+    \item Go to the next section's directory
 \end{itemize}
 \end{frame}
 
@@ -278,5 +281,6 @@ $ ls
 $ ls backup/dir/
 # Output: a.txt
 $ rm -r backup/
+$ cd ../../02-cli/
 \end{lstlisting}
 \end{frame}

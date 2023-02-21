@@ -7,7 +7,7 @@ Let's say you want to print many files at once.
 Try this simple example:
 \begin{lstlisting}[language=bash]
 $ for i in {01..05}; do \
-    cat um-logo-$i.txt \
+    cat um-logo-$i.txt; \
   done
 \end{lstlisting}
 \end{frame}
@@ -259,7 +259,7 @@ This is why \tt{My Documents} was split into \tt{My} and \tt{Documents}.
 \newline \newline
 Adjust the \textbf{IFS} environment variable to delimit on \verb|\n| only:
 \begin{lstlisting}[language=bash]
-# for-backup.sh
+# for-backup.sh (modified)
 IFS=$'\n'
 for file in $(ls); do
     cp $file $file.backup
@@ -278,7 +278,7 @@ done
 \frametitle{\textbf{for} statements: accumulator}
 Let's try keeping count with an integer variable.
 \begin{lstlisting}[language=bash]
-# for-backup.sh
+# for-backup.sh (modified)
 IFS=$'\n'
 count=0
 for file in $(ls); do
@@ -297,7 +297,6 @@ echo "$count files backed up"
 Print the odd numbered lines of \tt{05-scripting/logos.txt}.
 % \pause
 % \begin{lstlisting}[language=bash]
-% # logos.sh
 % IFS=$'\n'
 % count=0
 % for line in $(cat logos.txt); do
@@ -319,10 +318,10 @@ Print every line with its number greater than any of the lines above.
 % IFS=$'\n'
 % max=0
 % for line in $(cat obf.txt); do
-    % year=$(echo $line | grep -oE '^[0-9]{8}')
-    % if [[ $year -gt $max ]]; then
+    % num=$(echo $line | grep -oE '^[0-9]{8}')
+    % if [[ $num -gt $max ]]; then
         % echo $line
-        % max=$year
+        % max=$num
     % fi
 % done
 % \end{lstlisting}
