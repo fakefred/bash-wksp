@@ -1,4 +1,3 @@
-IFS=$'\n'
 count=0
 for file in $(ls); do
     cp $file $file.backup
