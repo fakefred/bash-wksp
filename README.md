@@ -54,11 +54,11 @@ out one copy per participant.
 
 ## TODO
 
-- [ ] Proofread slides
-- [ ] Proofread cheatsheet
-- [ ] Test in-slide scripts against tarball
+- [x] Proofread slides
+- [x] Proofread cheatsheet
+- [x] Test in-slide scripts against tarball
 - [ ] Distribute tarball
-- [ ] Find a good bash environment on Windows
+- [x] Find a good bash environment on Windows
 - [ ] Write a WeChat promotional article
 
 ## License
