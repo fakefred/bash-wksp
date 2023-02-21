@@ -151,15 +151,12 @@ Inside \tt{03-pipes/random/}:
 \end{itemize}
 \end{frame}
 
-\begin{frame}<presentation:0>[fragile]
+\begin{frame}[fragile]
 \frametitle{Solution}
 \begin{lstlisting}[language=bash]
 $ ls | grep FDU
-# Output: 3OnFDUqj  htEnBFDU  uMH1FDUz
 $ ls | grep -i UM
-# Output: AumFE8go  fN8UmybQ  g6uMzfDU  ...
 $ ls | grep -i UM | grep -i -v FDU
-# Output: AumFE8go  fN8UmybQ  NZKUmo0N  ...
 \end{lstlisting}
 \end{frame}
 
