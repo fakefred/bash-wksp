@@ -2,329 +2,337 @@
 
 \section{IV. Regex}
 \begin{frame}
-\frametitle{What's a regex}
-\textbf{Regex}: ``regular expressions''
-\newline \newline
-It is a string… to match patterns in other strings.
+    \frametitle{What's a regex}
+    \textbf{Regex}: ``regular expressions''
+    \newline \newline
+    It is a string… to match patterns in other strings.
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{What can (and can't) a regex do}
-A regex can (attempt to):
-\begin{itemize}
-    \item Match a cell phone number: \verb|[0-9]{11}|
-    \item Match a .com domain: \verb|([A-Za-z0-9-]+\.)+com|
-    \item Match \textit{Star Wars} subtitles but not \textit{Star Trek}:
-        \verb!m | [tn]|b!\footnote{Credit: \url{https://xkcd.com/1313/}}
-        \footnote{The art of regex golf: \url{https://alf.nu/RegexGolf}}
-\end{itemize}
-It cannnot:
-\begin{itemize}
-    \item Understand emotion (you want NLP)
-    \item Write your essays (you want GPT)
-    \item Moderate a Minecraft server (you want a real human)
-\end{itemize}
+    \frametitle{What can (and can't) a regex do}
+    A regex can (attempt to):
+    \begin{itemize}
+        \item Match a cell phone number: \verb|[0-9]{11}|
+        \item Match a .com domain: \verb|([A-Za-z0-9-]+\.)+com|
+        \item Match \textit{Star Wars} subtitles but not \textit{Star Trek}:
+              \verb!m | [tn]|b!\footnote{Credit: \url{https://xkcd.com/1313/}}
+              \footnote{The art of regex golf: \url{https://alf.nu/RegexGolf}}
+        \item Match all decimal numbers that are divisible by 3\footnote{\url{https://regex101.com/library/eI5xB8}}
+        \item Match an ERE regular expression \footnote{\href{https://stackoverflow.com/questions/17843691/javascript-regex-to-match-a-regex}{regex-to-match-a-regex}}
+        \item Be accepted by a deterministic finite automaton (DFA)
+    \end{itemize}
+    It cannot:
+    \begin{itemize}
+        \item Parse Python script (Regular Language $\subset$ Context Free Language $\subset$ Context Sensitive Language)
+        \item Match structures with special properties like $\{a^nb^n, n\geq 0\}$
+        \item Match language that involves nested structure
+    \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Regex is a mess}
-\begin{block}{Quote}
-I define UNIX as 30 definitions of regular expressions living under one roof.
-\begin{flushright}
-    — Donald Knuth\footnote{Digital Typography, ch. 33, p. 649 (1999)}
-\end{flushright}
-\end{block}
+    \frametitle{Regex is a mess}
+    \begin{block}{Quote}
+        I define UNIX as 30 definitions of regular expressions living under one roof.
+        \begin{flushright}
+            — Donald Knuth\footnote{Digital Typography, ch. 33, p. 649 (1999)}
+        \end{flushright}
+    \end{block}
 
-Two dominant standards:
-\begin{itemize}
-    \item \textbf{ERE} (Extended RegEx, POSIX compliant)
-    \item \textbf{PCRE} (Perl Compatible RegEx, used in Perl and Python)
-\end{itemize}
-Our focus today will be ERE.
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Regex patterns: \tt{.}}
-The dot is the simplest pattern:
-\begin{table}
-    \centering
-    \begin{tabular}{ll}
-        \textbf{Pattern}    & \textbf{Matches} \\
-        \verb|.|            & any character \\
-    \end{tabular}
-\end{table}
-
-\begin{example}
-    \verb|c.t| matches \tt{cat}, \tt{cut}, and \tt{c t}.
-\end{example}
-
-\begin{block}{Note}
-    \verb|\.| matches a literal dot. Same goes for \verb|\(| \verb|\[| etc.
-\end{block}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Regex patterns: \tt{[]}}
-Brackets match any of the characters inside, but \verb|^| and \verb|-| are special:
-\begin{table}
-    \centering
-    \begin{tabular}{ll}
-        \verb|[aeiou]|      & any vowel \\
-        \verb|[^aeiou]|     & anything but a vowel \\
-        \verb|[0-9]|        & any digit \\
-        \verb|[^A-Za-z]|    & anything but letters \\
-    \end{tabular}
-\end{table}
-
-\begin{example}
-    \verb|[A-C][01][0-9]| matches \tt{A00} up to \tt{C19}.
-\end{example}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Regex patterns: character classes}
-\begin{table}
-    \centering
-    \begin{tabular}{ll}
-        \verb|\w|           & \verb|[A-Za-z0-9_]| \\
-        \verb|\W|           & anything \verb|\w| does not match \\
-        \verb|\s|           & whitespace (space, tab, linebreak, etc) \\
-        \verb|\S|           & anything but whitespace \\
-    \end{tabular}
-\end{table}
-
-\begin{block}{Note}
-    Character classes in brackets like \verb|[\w\s]| won't work.
-\end{block}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Regex patterns: \tt{| ()}}
-Vertical bars separate patterns, and matches one of them.
-Parentheses can be used to group patterns.
-\begin{table}
-    \centering
-    \begin{tabular}{ll}
-        \verb![bc]at|[dh]og!        & bat, cat, dog, or hog \\
-        \verb!(ls|cd|rm -r) dir!    & \tt{ls dir}, \tt{cd dir}, or \tt{rm -r dir} \\
-    \end{tabular}
-\end{table}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Regex patterns: repeat}
-A repeated pattern can be matched:
-\begin{table}
-    \centering
-    \begin{tabular}{ll}
-        \verb|A?|           & zero or one A \\
-        \verb|A+|           & one or more A's \\  % Positive closure
-        \verb|A*|           & zero or more A's \\ % Kleene closure
-        \verb|A{6}|         & 6 A's \\
-        \verb|A{4,6}|       & 4--6 A's \\
-        \verb|A{4,}|        & more than 4 A's \\
-    \end{tabular}
-\end{table}
-
-\begin{example}
-    \verb|[0-9]{1,3}(,[0-9]{3})*| matches \tt{13} and \tt{420,691,337}.
-\end{example}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Regex patterns: location}
-These do not match literal characters. Instead, they specify the location of
-the character before/after it.
-\begin{table}
-    \centering
-    \begin{tabular}{ll}
-        \verb|^|            & beginning of string \\
-        \verb|$|            & end of string \footnote{Beginning or end of line sometimes} \\
-        \verb|\b|           & word boundary \\
-        \verb|\B|           & not word boundary \\
-    \end{tabular}
-\end{table}
-
-\begin{example}
+    Two dominant standards:
     \begin{itemize}
-        \item \verb|^$| matches an empty string only
-        \item \verb|\bwork\B| matches \tt{bash workshop} and \tt{worker},
-            but not \tt{homework}
+        \item \textbf{ERE} (Extended RegEx, POSIX compliant)
+        \item \textbf{PCRE} (Perl Compatible RegEx, used in Perl and Python)
     \end{itemize}
-\end{example}
+    Our focus today will be ERE.
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Quiz: Does it match?}
-What strings does this regex match? \newline
-
-\Large \verb!^cat|cat$! \normalsize
-
-\begin{itemize}
-    \item \verb|cat|                      % yes
-    \item \verb|^cat$|                    % no
-    \item \verb|cats|                     % yes
-    \item \verb|cat /etc/fstab|           % yes
-    \item \verb|I have a cat.|            % no
-    \item \verb|Cats are the best.|       % no
-    \item \verb|Concatenate these files|  % no
-\end{itemize}
+    \frametitle{Experiments with Regex online}
+    Regex101 (\url{https://regex101.com/}) is an online regular expression evaluator with multiple standards supported. You can try writing regular expressions online.
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Quiz: Does it match?}
-What matches \tt{+86 021} but not \tt{+86021}?
-\begin{itemize}
-    \item \verb|\+86\s+[0-9]{3}| % this one
-    \item \verb|\+86\s*[0-9]{3}|
-\end{itemize}
+    \frametitle{Regex patterns: \tt{.}}
+    The dot is the simplest pattern:
+    \begin{table}
+        \centering
+        \begin{tabular}{ll}
+            \textbf{Pattern} & \textbf{Matches} \\
+            \verb|.|         & any character    \\
+        \end{tabular}
+    \end{table}
 
-What does \Large \verb|[um]jicanvas.com| \normalsize match?
-\begin{itemize}
-    \item \tt{umjicanvas.com}
-    \item \tt{jicanvas.com} % neither
-\end{itemize}
+    \begin{example}
+        \verb|c.t| matches \tt{cat}, \tt{cut}, and \tt{c t}.
+    \end{example}
 
-\begin{block}{Challenge}
-    How to fix this regex? % (um)?jicanvas\.com
-\end{block}
+    \begin{block}{Note}
+        \verb|\.| matches a literal dot. Same goes for \verb|\(| \verb|\[| etc.
+    \end{block}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{But how to use a regex, anyway?}
-Try this in \tt{04-regex/}:
-\begin{lstlisting}[language=bash]
+    \frametitle{Regex patterns: \tt{[]}}
+    Brackets match any of the characters inside, but \verb|^| and \verb|-| are special:
+    \begin{table}
+        \centering
+        \begin{tabular}{ll}
+            \verb|[aeiou]|   & any vowel            \\
+            \verb|[^aeiou]|  & anything but a vowel \\
+            \verb|[0-9]|     & any digit            \\
+            \verb|[^A-Za-z]| & anything but letters \\
+        \end{tabular}
+    \end{table}
+
+    \begin{example}
+        \verb|[A-C][01][0-9]| matches \tt{A00} up to \tt{C19}.
+    \end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Regex patterns: character classes}
+    \begin{table}
+        \centering
+        \begin{tabular}{ll}
+            \verb|\w| & \verb|[A-Za-z0-9_]|                     \\
+            \verb|\W| & anything \verb|\w| does not match       \\
+            \verb|\s| & whitespace (space, tab, linebreak, etc) \\
+            \verb|\S| & anything but whitespace                 \\
+        \end{tabular}
+    \end{table}
+
+    \begin{block}{Note}
+        Character classes in brackets like \verb|[\w\s]| won't work.
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Regex patterns: \tt{| ()}}
+    Vertical bars separate patterns, and matches one of them.
+    Parentheses can be used to group patterns.
+    \begin{table}
+        \centering
+        \begin{tabular}{ll}
+            \verb![bc]at|[dh]og!     & bat, cat, dog, or hog                       \\
+            \verb!(ls|cd|rm -r) dir! & \tt{ls dir}, \tt{cd dir}, or \tt{rm -r dir} \\
+        \end{tabular}
+    \end{table}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Regex patterns: repeat}
+    A repeated pattern can be matched:
+    \begin{table}
+        \centering
+        \begin{tabular}{ll}
+            \verb|A?|     & zero or one A    \\
+            \verb|A+|     & one or more A's  \\  % Positive closure
+            \verb|A*|     & zero or more A's \\ % Kleene closure
+            \verb|A{6}|   & 6 A's            \\
+            \verb|A{4,6}| & 4--6 A's         \\
+            \verb|A{4,}|  & more than 4 A's  \\
+        \end{tabular}
+    \end{table}
+
+    \begin{example}
+        \verb|[0-9]{1,3}(,[0-9]{3})*| matches \tt{13} and \tt{420,691,337}.
+    \end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Regex patterns: location}
+    These do not match literal characters. Instead, they specify the location of
+    the character before/after it.
+    \begin{table}
+        \centering
+        \begin{tabular}{ll}
+            \verb|^|  & beginning of string                                         \\
+            \verb|$|  & end of string \footnote{Beginning or end of line sometimes} \\
+            \verb|\b| & word boundary                                               \\
+            \verb|\B| & not word boundary                                           \\
+        \end{tabular}
+    \end{table}
+
+    \begin{example}
+        \begin{itemize}
+            \item \verb|^$| matches an empty string only
+            \item \verb|\bwork\B| matches \tt{bash workshop} and \tt{worker},
+                  but not \tt{homework}
+        \end{itemize}
+    \end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Quiz: Does it match?}
+    What strings does this regex match? \newline
+
+    \Large \verb!^cat|cat$! \normalsize
+
+    \begin{itemize}
+        \item \verb|cat|                      % yes
+        \item \verb|^cat$|                    % no
+        \item \verb|cats|                     % yes
+        \item \verb|cat /etc/fstab|           % yes
+        \item \verb|I have a cat.|            % no
+        \item \verb|Cats are the best.|       % no
+        \item \verb|Concatenate these files|  % no
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Quiz: Does it match?}
+    What matches \tt{+86 021} but not \tt{+86021}?
+    \begin{itemize}
+        \item \verb|\+86\s+[0-9]{3}| % this one
+        \item \verb|\+86\s*[0-9]{3}|
+    \end{itemize}
+
+    What does \Large \verb|[um]jicanvas.com| \normalsize match?
+    \begin{itemize}
+        \item \tt{umjicanvas.com}
+        \item \tt{jicanvas.com} % neither
+    \end{itemize}
+
+    \begin{block}{Challenge}
+        How to fix this regex? % (um)?jicanvas\.com
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{But how to use a regex, anyway?}
+    Try this in \tt{04-regex/}:
+    \begin{lstlisting}[language=bash]
 $ grep -E '.+\..+@sjtu.edu.cn' faculty
 \end{lstlisting}
-\pause
-\begin{block}{Observation}
-    The regex matches all email addresses in the file \tt{faculty}
-    that look like ``firstname.lastname@sjtu.edu.cn''.
-    \newline \newline
-    \tt{-E} stands for Extended regex.
-\end{block}
+    \pause
+    \begin{block}{Observation}
+        The regex matches all email addresses in the file \tt{faculty}
+        that look like ``firstname.lastname@sjtu.edu.cn''.
+        \newline \newline
+        \tt{-E} stands for Extended regex.
+    \end{block}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{One more example}
-Try this in \tt{04-regex/}:
-\begin{lstlisting}[language=bash]
+    \frametitle{One more example}
+    Try this in \tt{04-regex/}:
+    \begin{lstlisting}[language=bash]
 $ grep -oE '^[^@]{,8}' faculty
 \end{lstlisting}
-\pause
-\begin{block}{Observation}
-    ``@sjtu.edu.cn'' are all gone, and each line is at most 8 characters long.
-\end{block}
-\begin{block}{Explanation}
-    \begin{tabular}{ll}
-        \verb|^|    & From beginning of each line \\
-        \verb|[^@]| & Keep any character except @ \\
-        \verb|{,8}| & Until we reach length 8
-    \end{tabular}
-\end{block}
+    \pause
+    \begin{block}{Observation}
+        ``@sjtu.edu.cn'' are all gone, and each line is at most 8 characters long.
+    \end{block}
+    \begin{block}{Explanation}
+        \begin{tabular}{ll}
+            \verb|^|    & From beginning of each line \\
+            \verb|[^@]| & Keep any character except @ \\
+            \verb|{,8}| & Until we reach length 8
+        \end{tabular}
+    \end{block}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Your turn}
-Extract all course codes from \tt{04-regex/courses}. \newline
+    \frametitle{Your turn}
+    Extract all course codes from \tt{04-regex/courses}. \newline
 
-\begin{example}
-    \begin{tabular}{lcl}
-        VG100 Introduction to Engineering & & VG100 \\
-        VM020 Machineshop Training & $\Longrightarrow$ & VM020 \\
-        VP140 Physics I & & VP140
-    \end{tabular}
-\end{example}
-\pause
-\begin{block}{Solution (naïve version)}
-\begin{lstlisting}[language=bash]
+    \begin{example}
+        \begin{tabular}{lcl}
+            VG100 Introduction to Engineering &                   & VG100 \\
+            VM020 Machineshop Training        & $\Longrightarrow$ & VM020 \\
+            VP140 Physics I                   &                   & VP140
+        \end{tabular}
+    \end{example}
+    \pause
+    \begin{block}{Solution (naïve version)}
+        \begin{lstlisting}[language=bash]
 $ grep -oE 'V[A-Z][0-9]+' courses
 \end{lstlisting}
-\end{block}
+    \end{block}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Find and replace with \tt{sed}}
-\tt{sed} is a powerful tool for transforming text.
-We will be using one very specific syntax for substitution:\footnote{
-    When the pattern/replacement contains slashes, you can use things like
-    \tt{!} and \tt{,} as delimiters.
-}
-\begin{lstlisting}[language=bash]
+    \frametitle{Find and replace with \tt{sed}}
+    \tt{sed} is a powerful tool for transforming text.
+    We will be using one very specific syntax for substitution:\footnote{
+        When the pattern/replacement contains slashes, you can use things like
+        \tt{!} and \tt{,} as delimiters.
+    }
+    \begin{lstlisting}[language=bash]
 $ COMMAND | sed -E 's/FIND/REPLACE/FLAGS'
 $ sed -E 's/FIND/REPLACE/FLAGS' FILE
 \end{lstlisting}
-\tt{-E} again stands for Extended regex, and flags are optional.
-This command redacts all the IPv4 addresses in the file \tt{ipv4}:
-\begin{lstlisting}[language=bash]
+    \tt{-E} again stands for Extended regex, and flags are optional.
+    This command redacts all the IPv4 addresses in the file \tt{ipv4}:
+    \begin{lstlisting}[language=bash]
 $ sed -E 's/([0-9]{1,3}\.){3}[0-9]{1,3}/redacted/g' \
     ipv4
 \end{lstlisting}
-\begin{block}{Observe}
-    What will happen without the \tt{g} at the end?
-\end{block}
+    \begin{block}{Observe}
+        What will happen without the \tt{g} at the end?
+    \end{block}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Capturing groups}
-A \textbf{capturing group}, or simply \textbf{group}, is a pattern inside
-parentheses that mark a region of text you want to keep in the replaced text.
-\newline \newline
-It can be accessed with a respective \textbf{backreference} which looks like
-\verb|\1|, \verb|\2|, up to \verb|\9|.
+    \frametitle{Capturing groups}
+    A \textbf{capturing group}, or simply \textbf{group}, is a pattern inside
+    parentheses that mark a region of text you want to keep in the replaced text.
+    \newline \newline
+    It can be accessed with a respective \textbf{backreference} which looks like
+    \verb|\1|, \verb|\2|, up to \verb|\9|.
 
-When nested, the position of \verb|(| determines order, so the outside group is
-\verb|\1| and the inside is \verb|\2|.
+    When nested, the position of \verb|(| determines order, so the outside group is
+    \verb|\1| and the inside is \verb|\2|.
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Capturing groups with \tt{sed}}
-What if you only want to redact the subnet (i.e. last part) of the IP addresses?
-\begin{lstlisting}[language=bash]
+    \frametitle{Capturing groups with \tt{sed}}
+    What if you only want to redact the subnet (i.e. last part) of the IP addresses?
+    \begin{lstlisting}[language=bash]
 $ sed -E 's/(([0-9]{1,3}\.){3})[0-9]{1,3}/\1xxx/g' \
     ipv4
 \end{lstlisting}
-\begin{block}{Observation}
-    IP addresses like \tt{192.168.1.1} become \tt{192.168.1.xxx}
-\end{block}
+    \begin{block}{Observation}
+        IP addresses like \tt{192.168.1.1} become \tt{192.168.1.xxx}
+    \end{block}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Your turn}
-From \tt{04-regex/courses}, select 100- and 200-level math courses and convert
-legacy ``VV'' course codes into modern ``MATH'' codes.
-Do not print other courses.
-\begin{example}
-    \begin{tabular}{lcl}
-        VV156 & & MATH1560J \\
-        VV214 & $\Longrightarrow$ & MATH2140J \\
-        VV417 & & \textit{not printed}
-    \end{tabular}
-\end{example}
-\pause
-\begin{block}{Solution}
-\begin{lstlisting}[language=bash]
+    \frametitle{Your turn}
+    From \tt{04-regex/courses}, select 100- and 200-level math courses and convert
+    legacy ``VV'' course codes into modern ``MATH'' codes.
+    Do not print other courses.
+    \begin{example}
+        \begin{tabular}{lcl}
+            VV156 &                   & MATH1560J            \\
+            VV214 & $\Longrightarrow$ & MATH2140J            \\
+            VV417 &                   & \textit{not printed}
+        \end{tabular}
+    \end{example}
+    \pause
+    \begin{block}{Solution}
+        \begin{lstlisting}[language=bash]
 $ grep -E 'VV[12]' courses | \
     sed -E 's/VV([0-9]{3})/MATH\10J/'
 \end{lstlisting}
-\end{block}
+    \end{block}
 \end{frame}
 
 \begin{frame}
-\frametitle{When not to use regex?}
-\begin{columns}
-    \begin{column}{0.7\textwidth}
-        \includegraphics[width=\textwidth]{regex_explained}
-    \end{column}
-    \begin{column}{0.3\textwidth}
-        If your regex:
-        \begin{itemize}
-            \item is 50 characters long
-            \item handles lots of Unicode
-            \item has too many backslashes
-        \end{itemize}
-        consider something else.
-    \end{column}
-\end{columns}
+    \frametitle{When not to use regex?}
+    \begin{columns}
+        \begin{column}{0.7\textwidth}
+            \includegraphics[width=\textwidth]{regex_explained}
+        \end{column}
+        \begin{column}{0.3\textwidth}
+            If your regex:
+            \begin{itemize}
+                \item is 50 characters long
+                \item handles lots of Unicode
+                \item has too many backslashes
+            \end{itemize}
+            consider something else.
+        \end{column}
+    \end{columns}
 \end{frame}
 
