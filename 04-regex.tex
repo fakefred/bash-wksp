@@ -20,9 +20,9 @@ A regex can (attempt to):
 \end{itemize}
 It cannnot:
 \begin{itemize}
-    \item Understand emotion (you want NLP)
-    \item Write your essays (you want GPT)
-    \item Moderate a Minecraft server (you want a real human)
+    \item Parse Python code
+    \item Detect homework plagiarism
+    \item Moderate a Minecraft server
 \end{itemize}
 \end{frame}
 
@@ -328,3 +328,29 @@ $ grep -E 'VV[12]' courses | \
 \end{columns}
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Atrocities under regex's name}
+If you match a Chinese resident ID with \verb|[0-9]{18}|, people whose
+ID ends with X will be mad at you.
+
+Apart from ignorance, people also abuse regex for fun. This is a regex
+that matches a regex:
+\begin{lstlisting}
+/\/((?![*+?])(?:[^\r\n\[/\\]|\\.|\[(?:[^\r\n\]\\]|\\.)*\])+)\/((?:g(?:im?|mi?)?|i(?:gm?|mg?)?|m(?:gi?|ig?)?)?)/
+\end{lstlisting}
+
+And here's one that matches integers that are divisible by 3:
+\begin{lstlisting}
+^(?:[0369] |
+(?:[147](?:[147][0369]*[258]|[0369])*[258]) |
+(?:[258](?:[258][0369]*[147]|[0369])*[147]))+$
+\end{lstlisting}
+
+(These two examples are not ERE.)
+\end{frame}
+
+\begin{frame}
+\frametitle{Beyond the workshop}
+Regex101 (\url{https://regex101.com/}) is an online regular expression
+evaluator that supports ERE, PCRE, and many others.
+\end{frame}
