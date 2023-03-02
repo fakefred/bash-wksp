@@ -193,6 +193,7 @@ What does \Large \verb|[um]jicanvas.com| \normalsize match?
 \begin{frame}[fragile]
 \frametitle{But how to use a regex, anyway?}
 Try this in \tt{04-regex/}:
+\footnote{For Mac users, instead of \tt{grep} you might have to type \tt{ggrep}}
 \begin{lstlisting}[language=bash]
 $ grep -E '.+\..+@sjtu.edu.cn' faculty
 \end{lstlisting}
@@ -246,6 +247,7 @@ $ grep -oE 'V[A-Z][0-9]+' courses
 \begin{frame}[fragile]
 \frametitle{Find and replace with \tt{sed}}
 \tt{sed} is a powerful tool for transforming text.
+\footnote{For Mac users, this may be called \tt{gsed}.}
 We will be using one very specific syntax for substitution:\footnote{
     When the pattern/replacement contains slashes, you can use things like
     \tt{!} and \tt{,} as delimiters.
