@@ -163,15 +163,25 @@ For example, \verb|[01][0-9]| matches \tt{00} up to \tt{19}.
 
 \begin{frame}[fragile]
 \frametitle{Quiz: Does it match?}
-What does \Large \verb|[um]jicanvas.com| \normalsize match?
-\begin{itemize}
-    \item \tt{umjicanvas.com}
-    \item \tt{jicanvas.com} % neither
-\end{itemize}
-\pause
-\begin{block}{Challenge}
-    How to fix this regex? % (um)?jicanvas\.com
-\end{block}
+\begin{columns}
+    \begin{column}{0.4\textwidth}
+        \includegraphics[width=\textwidth]{will_smith}
+    \end{column}
+    \begin{column}{0.6\textwidth}
+        What does \Large \verb|[um]jicanvas.com| \normalsize match?
+        \begin{itemize}
+            \item \tt{umjicanvas.com}
+            \item \tt{jicanvas.com} % neither
+        \end{itemize}
+        \vspace{1cm}
+
+        \pause
+        \begin{block}{Challenge}
+            There is another problem if you want to match these two strings
+            only. Can you spot it?
+        \end{block}
+    \end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -251,19 +261,26 @@ the character before/after it.
 
 \begin{frame}[fragile]
 \frametitle{Quiz: Does it match?}
-What strings does this regex match? \newline
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        What strings does this regex match? \newline
 
-\Large \verb!(^cat)|(cat$)! \normalsize
+        \Large \verb!(^cat)|(cat$)! \normalsize
 
-\begin{itemize}
-    \item \verb|cat|                      % yes
-    \item \verb|^cat$|                    % no
-    \item \verb|cats|                     % yes
-    \item \verb|cat /etc/fstab|           % yes
-    \item \verb|I have a cat.|            % no
-    \item \verb|Cats are the best.|       % no
-    \item \verb|Concatenate these files|  % no
-\end{itemize}
+        \begin{itemize}
+            \item \verb|cat|                      % yes
+            \item \verb|^cat$|                    % no
+            \item \verb|cats|                     % yes
+            \item \verb|cat /etc/fstab|           % yes
+            \item \verb|I have a cat.|            % no
+            \item \verb|Cats are the best.|       % no
+            \item \verb|Concatenate these files|  % no
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \includegraphics[width=\textwidth]{serval}
+    \end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -438,7 +455,8 @@ $ sed -E 's/VV([0-9]{3})/MATH\10J/' | \
 \end{lstlisting}
 \begin{block}{Note}
     \begin{itemize}
-        \item \verb|\| means ``continue on next line''.
+        \item The \verb|\| at the end of the line means ``continue on next
+            line''.
         \item \verb|\10| does not mean group 10! It means group 1, followed by
             a 0.
     \end{itemize}
@@ -446,12 +464,36 @@ $ sed -E 's/VV([0-9]{3})/MATH\10J/' | \
 \end{frame}
 
 \begin{frame}
+\frametitle{Beyond the workshop}
+Congratulations! You know all the basics of regex.
+\bigskip
+
+Regex101 (\url{https://regex101.com/}) is an online regular expression
+evaluator that supports ERE, PCRE, and many others.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The Don'ts}
+Some regexes seem correct, but can cause trouble.
+\begin{itemize}
+    \item The Chinese resident ID is \textbf{not} \verb|[0-9]{18}| (last digit
+        can be X)
+    \item Emails are \textbf{not} \verb|\w+@\w+\.\w+| (people may use \tt{.},
+        \tt{+} or other characters before \tt{@})
+    \item Names are \textbf{not} \verb|[A-Za-z ]+| (complicated topic)
+\end{itemize}
+\bigskip
+
+Some tasks are outright impossible, such as parsing Python.
+\end{frame}
+
+\begin{frame}
 \frametitle{When not to use regex?}
 \begin{columns}
-    \begin{column}{0.7\textwidth}
+    \begin{column}{0.6\textwidth}
         \includegraphics[width=\textwidth]{regex_explained}
     \end{column}
-    \begin{column}{0.3\textwidth}
+    \begin{column}{0.4\textwidth}
         If your regex:
         \begin{itemize}
             \item is 50 characters long
@@ -464,13 +506,13 @@ $ sed -E 's/VV([0-9]{3})/MATH\10J/' | \
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Atrocities under regex's name}
-If you match a Chinese resident ID with \verb|[0-9]{18}|, people whose
-ID ends with X will be mad at you.
+\frametitle{Regex golf}
+Apart from ignorance, people also abuse regex for fun. In \textbf{regex golf},
+you try to find the shortest regex to match some strings but not others.
+\textbf{Please do not play regex golf in production.}
 \bigskip
 
-Apart from ignorance, people also abuse regex for fun. This is a regex
-that matches a JavaScript regex:
+This is a regex that matches a JavaScript regex:
 \begin{lstlisting}
 /\/((?![*+?])(?:[^\r\n\[/\\]|\\.|\[(?:[^\r\n\]\\]|\\.)*\])+)\/((?:g(?:im?|mi?)?|i(?:gm?|mg?)?|m(?:gi?|ig?)?)?)/
 \end{lstlisting}
@@ -500,9 +542,4 @@ Two dominant standards:
     \item \textbf{PCRE} (Perl Compatible RegEx, used in Perl and Python)
 \end{itemize}
 What we talked about today is ERE.
-\end{frame}
-\begin{frame}
-\frametitle{Beyond the workshop}
-Regex101 (\url{https://regex101.com/}) is an online regular expression
-evaluator that supports ERE, PCRE, and many others.
 \end{frame}
